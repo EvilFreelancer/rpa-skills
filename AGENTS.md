@@ -3,12 +3,30 @@
 This document describes the **standard process** for adding a new agent skill to the repository. Follow the steps
 carefully so that the skill can be discovered, loaded, and used by the OpenCode platform.
 
+## Agent Skills references (read before authoring)
+
+Use these sources so you do not rely on memory alone when designing skills, progressive disclosure, and security:
+
+- [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills) (Anthropic Engineering, progressive disclosure, metadata, bundled scripts)
+- [anthropics/skills](https://github.com/anthropics/skills) (examples, `template/`, `spec/`, document skills patterns)
+- [agentskills.io specification](https://agentskills.io/) and [Best practices for skill creators](https://agentskills.io/skill-creation/best-practices) (scope, tokens, defaults, gotchas, when to split reference files)
+
+### RPA workflow skills in this repo
+
+| Skill directory | Purpose |
+|-----------------|--------|
+| `rpa-init` | Warm up project context (code, docs, tests, BDD-style behavior focus) |
+| `rpa-gen-rules` | Generate or refresh agent rules (Cursor `.mdc`, Claude Code `CLAUDE.md` / `.claude/rules/`); examples in `references/cursor-examples/.cursor/`, `references/claude-examples/.claude/` |
+| `rpa-feat` | New feature via TDD plus full suite and docs |
+| `rpa-bugfix` | Reproduction test, fix, full suite, short report |
+
 ---
 
 ## 1. Directory Structure
 
 Create a dedicated directory for each skill under the repository root. The directory name should be the **skill’s name
-** (lower‑case, hyphen‑free).
+** (lower‑case, hyphen‑free), unless the skill is part of the `rpa-*` workflow set where hyphenated names match the
+invocation (`rpa-init`, `rpa-gen-rules`, `rpa-feat`, `rpa-bugfix`).
 
 ```
 <repo-root>/my-skill/

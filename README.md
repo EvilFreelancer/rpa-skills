@@ -5,24 +5,30 @@ reference material for AI agents in Cursor, Kimi Code CLI, Claude Code, OpenAI C
 
 ## Skills in this repository
 
-| Folder             | `name` in `SKILL.md` | Purpose                                                                         |
-|--------------------|----------------------|---------------------------------------------------------------------------------|
-| [logika/](logika/) | `logika`             | Classical formal logic (concepts, judgments, syllogisms, induction, fallacies). |
+| Folder | `name` in `SKILL.md` | Purpose |
+|--------|----------------------|---------|
+| [logika/](logika/) | `logika` | Classical formal logic (concepts, judgments, syllogisms, induction, fallacies). |
+| [rpa-init/](rpa-init/) | `rpa-init` | Onboard and warm up context: code, docs, tests, short report (BDD-oriented). |
+| [rpa-gen-rules/](rpa-gen-rules/) | `rpa-gen-rules` | Generate or refresh agent rules (Cursor `.mdc`, Claude Code `.claude/rules/`, references bundled). |
+| [rpa-feat/](rpa-feat/) | `rpa-feat` | New feature via TDD, full suite, docs. |
+| [rpa-bugfix/](rpa-bugfix/) | `rpa-bugfix` | Bugfix via regression test, full suite, short report. |
 
-More rows will be added as new skills are published.
+Each skill folder has its own **README.md** with details.
 
 ## Typical skill layout
 
-- `SKILL.md` - YAML frontmatter and main agent instructions.
+- `SKILL.md` - YAML frontmatter (`name`, `version`, `description`) and main agent instructions.
+- `README.md` - Human overview (recommended).
+- Optional `references/`, `scripts/`, or other assets.
 
-The skill directory name should match the `name` field in `SKILL.md`.
+The skill directory name should match the `name` field in `SKILL.md`. The `rpa-*` skills use hyphenated directory names to match slash commands such as `/rpa-init`.
 
 ## Making the agent use a skill
 
 In **Agent** chat (not only Inline Edit), you can pull a skill into the run in several ways.
 
 1. **Slash command** - type `/` in the chat input. Cursor shows available commands; pick the skill by its **`name`**
-   from `SKILL.md`, or type it directly, e.g. **`/logika`** for the logic skill in this repository.
+   from `SKILL.md`, or type it directly, e.g. **`/logika`** or **`/rpa-init`**.
 2. **`@` context** - type `@` and attach the skill (or the skill folder / `SKILL.md`) so that message is grounded in
    that skill's instructions.
 3. **Automatic selection** - the agent may load a skill on its own when your request matches the **`description`** in
@@ -68,3 +74,4 @@ The directory name must match the `name` field in `SKILL.md`.
 ## License
 
 This project is licensed under the MIT License, see the [LICENSE](LICENSE) file in the repository root for details.
+

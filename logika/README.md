@@ -1,4 +1,4 @@
-# Logika Skill
+# Logika (formal logic)
 
 **Purpose**: Provides the agent with a classical formal‑logic framework based on G.Chelpanov’s textbook. It enables the
 model to perform rigorous logical analysis, construct and evaluate syllogisms, detect logical fallacies, and apply
