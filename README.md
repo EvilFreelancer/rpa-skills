@@ -64,3 +64,7 @@ Copy or symlink the `<name>/` directory under one of these paths.
 - Project - `.codex/skills/<name>/`.
 
 The directory name must match the `name` field in `SKILL.md`.
+
+## License
+
+This project is licensed under the MIT License, see the [LICENSE](LICENSE) file in the repository root for details.
