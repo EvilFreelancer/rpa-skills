@@ -8,25 +8,17 @@ Motivation: [notes on vibe coding](https://t.me/evilfreelancer/1485) and the pro
 
 **Repository:** [github.com/EvilFreelancer/rpa-skills](https://github.com/EvilFreelancer/rpa-skills)
 
-## RPA workflow skills (`/rpa-*`)
-
-| Slash command | Role |
-|---------------|------|
-| **`/rpa-init`** | Warm up context on the repo. The agent studies application code, reads docs and test code, sets up the **dev environment** (install tooling the project expects, for example a venv), runs tests, writes a **short project report**. |
-| **`/rpa-gen-rules`** | Create or refresh **agent rules**. Bundled examples for **Cursor** (`.cursor/rules/*.mdc`) and **Claude Code** (`.claude/`). Rules encode a **layered approach** (implement layer 1 with no inward dependencies, then layer 2, and so on) and **BDD-style** development. |
-| **`/rpa-feat`** | Add a feature strictly **by BDD**: plan, tests (**red**), implementation (**green**), full test run, update docs and examples, run **linter / pre-commit** at the end when the repo uses them. **Requires** a clear task (for example text from an issue). |
-| **`/rpa-bugfix`** | Fix a bug: **reproduction test** first, then fix, then full test run and a **short report**. **Requires** a clear bug description. |
-
-**Input**
-
-- **`/rpa-init`** and **`/rpa-gen-rules`** run without extra briefing; the agent discovers the repo.
-- **`/rpa-feat`** and **`/rpa-bugfix`** need you to pass **what** to do (for example issue text). Without that, they cannot work correctly.
-
-## Other skills
+## Skills in this repository
 
 | Folder | `name` in `SKILL.md` | Purpose |
 |--------|----------------------|---------|
-| [logika/](logika/) | `logika` | Classical formal logic from G. Chelpanov's textbook (concepts, judgments, syllogisms, induction, fallacies). |
+| [rpa-init/](rpa-init/) | `rpa-init` | **`/rpa-init`** - Warm up context on the repo. The agent studies application code, reads docs and test code, sets up the **dev environment** (install tooling the project expects, for example a venv), runs tests, writes a **short project report**. Runs without an extra user brief. |
+| [rpa-gen-rules/](rpa-gen-rules/) | `rpa-gen-rules` | **`/rpa-gen-rules`** - Create or refresh **agent rules**. Bundled examples for **Cursor** (`.cursor/rules/*.mdc`) and **Claude Code** (`.claude/`). Rules encode a **layered approach** (layer 1 with no inward dependencies, then layer 2, and so on) and **BDD-style** development. Runs without an extra user brief. |
+| [rpa-feat/](rpa-feat/) | `rpa-feat` | **`/rpa-feat`** - Add a feature strictly **by BDD**: plan, tests (**red**), implementation (**green**), full test run, update docs and examples, **linter / pre-commit** at the end when the repo uses them. **Requires** a clear task (for example issue text). |
+| [rpa-bugfix/](rpa-bugfix/) | `rpa-bugfix` | **`/rpa-bugfix`** - **Reproduction test** first, then fix, full test run, **short report**. **Requires** a clear bug description. |
+| [logika/](logika/) | `logika` | **`/logika`** - Classical formal logic from G. Chelpanov's textbook (concepts, judgments, syllogisms, induction, fallacies). |
+
+**Input for `/rpa-*`** - **`/rpa-init`** and **`/rpa-gen-rules`** need no extra briefing. **`/rpa-feat`** and **`/rpa-bugfix`** need you to pass **what** to do (for example issue text), otherwise they will not work correctly.
 
 Each skill folder has its own **README.md** with details.
 
