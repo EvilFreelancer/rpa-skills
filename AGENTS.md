@@ -15,10 +15,10 @@ Use these sources so you do not rely on memory alone when designing skills, prog
 
 | Skill directory | Purpose |
 |-----------------|--------|
-| `rpa-init` | Warm up project context (code, docs, tests, BDD-style behavior focus) |
-| `rpa-gen-rules` | Generate or refresh agent rules (Cursor `.mdc`, Claude Code `CLAUDE.md` / `.claude/rules/`); examples in `references/cursor-examples/.cursor/`, `references/claude-examples/.claude/` |
-| `rpa-feat` | New feature via TDD plus full suite and docs |
-| `rpa-bugfix` | Reproduction test, fix, full suite, short report |
+| `rpa-init` | Context warm-up: code, docs, test code, dev env setup, run tests, short report (no extra user brief) |
+| `rpa-gen-rules` | Agent rules (Cursor `.mdc`, Claude Code `.claude/`); layered-cake + BDD; examples under `references/cursor-examples/.cursor/`, `references/claude-examples/.claude/` |
+| `rpa-feat` | New feature by BDD; requires task text; plan, red/green, full suite, docs, linter at end |
+| `rpa-bugfix` | Bugfix with repro test first; requires bug description; full suite, short report |
 
 ---
 

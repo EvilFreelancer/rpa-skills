@@ -2,31 +2,32 @@
 name: rpa-feat
 version: 1.0.0
 description: >
-  Run when the user invokes /rpa-feat and then describes a new feature. Uses TDD: failing tests first,
-  implementation, full pytest run, then documentation updates. Expects feature text in the same message or follow-up.
+  Run when the user invokes /rpa-feat together with a clear feature description (for example issue text).
+  BDD workflow: plan, failing tests, implementation, green tests, full suite, docs and examples, linter at the end.
+  Will not work correctly without the user supplying what to build.
 ---
 
-# RPA feature work (TDD)
+# RPA feature work (BDD)
 
 ## When this skill applies
 
-The user message should include `/rpa-feat` (or equivalent) and a **feature description** (what to build, acceptance criteria, edge cases). If the description is only "add X", ask one short clarifying question only when blocking.
+The user must include **`/rpa-feat`** and a **concrete feature description** in the same message or immediately after (scope, acceptance criteria, edge cases, issue text). If there is no actionable description, ask once for the minimum needed or stop.
 
 ## Principles
 
-Tests are the project long-term memory. Add behavior by first writing tests that encode the contract, then code that satisfies them, then run **all** tests to guard regressions.
+Behavior is anchored in tests. The loop is plan, **red**, **green**, full regression, documentation, then quality tools.
 
 ## Workflow
 
-1. **Understand** existing code, docs, and tests. Virtualenv: `.venv` when present. Align with `.cursor/rules/` if it exists.
-2. **Plan** briefly: touched modules, scenarios, edge cases, public API or config changes.
-3. **Write tests** that describe the new behavior. Names and structure should match project conventions (see `tests/` and any `testing.mdc` rule).
-4. **Run new tests** and confirm they **fail** for the right reason (feature absent or incorrect).
-5. **Implement** the smallest change that makes the new tests pass. Follow architecture boundaries and style rules.
-6. **Run the full test suite** (for example `pytest`). Fix any regressions.
-7. **Update documentation** where behavior, configuration, or public API changed (README, `docs/`, examples). Keep examples consistent with code (for example paired `examples.md` and `.http` if the project uses that pattern).
-8. **Optional quality gate** if the repo uses it: `pre-commit run -a` and fix reported issues.
+1. **Understand** existing code, docs, and tests. Use `.venv` and project conventions. Respect `.cursor/rules/` or `.claude/rules/` if present.
+2. **Plan** briefly: modules touched, scenarios, edge cases, public API or config changes.
+3. **Write tests** that specify the new behavior. Match project test style.
+4. **Run the new tests** and confirm they **fail** for the right reason.
+5. **Implement** until those tests pass.
+6. **Run the full test suite**. Fix regressions.
+7. **Update documentation and examples** wherever behavior, configuration, or public API changed.
+8. **Run linter / quality gate** at the end when the repository uses it (for example `pre-commit run -a`). Fix what it reports.
 
 ## Report
 
-Close with a compact summary: what was implemented, which tests were added or changed, full suite result, docs touched.
+Short summary: what shipped, tests added or changed, full suite result, docs touched, linter result.

@@ -3,15 +3,30 @@
 This repository holds [Pavel Zloi](https://t.me/evilfreelancer)'s agent skills - instructions and
 reference material for AI agents in Cursor, Kimi Code CLI, Claude Code, OpenAI Codex, and so on.
 
-## Skills in this repository
+Motivation: [notes on vibe coding](https://t.me/evilfreelancer/1485) and the prompt collection
+[cursor-vibe-prompts](https://github.com/EvilFreelancer/cursor-vibe-prompts) are packaged here as **skills** so you do not paste the same long instructions into chat every time.
+
+**Repository:** [github.com/EvilFreelancer/rpa-skills](https://github.com/EvilFreelancer/rpa-skills)
+
+## RPA workflow skills (`/rpa-*`)
+
+| Slash command | Role |
+|---------------|------|
+| **`/rpa-init`** | Warm up context on the repo. The agent studies application code, reads docs and test code, sets up the **dev environment** (install tooling the project expects, for example a venv), runs tests, writes a **short project report**. |
+| **`/rpa-gen-rules`** | Create or refresh **agent rules**. Bundled examples for **Cursor** (`.cursor/rules/*.mdc`) and **Claude Code** (`.claude/`). Rules encode a **layered approach** (implement layer 1 with no inward dependencies, then layer 2, and so on) and **BDD-style** development. |
+| **`/rpa-feat`** | Add a feature strictly **by BDD**: plan, tests (**red**), implementation (**green**), full test run, update docs and examples, run **linter / pre-commit** at the end when the repo uses them. **Requires** a clear task (for example text from an issue). |
+| **`/rpa-bugfix`** | Fix a bug: **reproduction test** first, then fix, then full test run and a **short report**. **Requires** a clear bug description. |
+
+**Input**
+
+- **`/rpa-init`** and **`/rpa-gen-rules`** run without extra briefing; the agent discovers the repo.
+- **`/rpa-feat`** and **`/rpa-bugfix`** need you to pass **what** to do (for example issue text). Without that, they cannot work correctly.
+
+## Other skills
 
 | Folder | `name` in `SKILL.md` | Purpose |
 |--------|----------------------|---------|
-| [logika/](logika/) | `logika` | Classical formal logic (concepts, judgments, syllogisms, induction, fallacies). |
-| [rpa-init/](rpa-init/) | `rpa-init` | Onboard and warm up context: code, docs, tests, short report (BDD-oriented). |
-| [rpa-gen-rules/](rpa-gen-rules/) | `rpa-gen-rules` | Generate or refresh agent rules (Cursor `.mdc`, Claude Code `.claude/rules/`, references bundled). |
-| [rpa-feat/](rpa-feat/) | `rpa-feat` | New feature via TDD, full suite, docs. |
-| [rpa-bugfix/](rpa-bugfix/) | `rpa-bugfix` | Bugfix via regression test, full suite, short report. |
+| [logika/](logika/) | `logika` | Classical formal logic from G. Chelpanov's textbook (concepts, judgments, syllogisms, induction, fallacies). |
 
 Each skill folder has its own **README.md** with details.
 

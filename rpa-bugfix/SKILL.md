@@ -2,29 +2,30 @@
 name: rpa-bugfix
 version: 1.0.0
 description: >
-  Run when the user invokes /rpa-bugfix and describes a bug. Writes a failing reproduction test first, fixes the code, runs all tests, and returns a short report. Expects bug description from the user.
+  Run when the user invokes /rpa-bugfix together with a clear bug description (expected vs actual, reproduction).
+  Reproduction test first, then fix, full test suite, short report. Will not work correctly without the bug details.
 ---
 
 # RPA bugfix (test-first)
 
 ## When this skill applies
 
-The user message should include `/rpa-bugfix` (or equivalent) and a **bug description** (expected vs actual, how to reproduce, environment if relevant). Ask a clarifying question only when reproduction is impossible without it.
+The user must include **`/rpa-bugfix`** and a **bug description** (expected vs actual, steps to reproduce, environment if relevant). Paste issue text when possible. If reproduction is impossible without one missing fact, ask that single blocking question.
 
 ## Principles
 
-A bug is a mismatch between intended behavior and current behavior. Encode the intention in a **regression test** so the bug cannot return unnoticed.
+Encode the intended behavior in a **regression test** so the defect cannot silently return.
 
 ## Workflow
 
-1. **Understand** the area of code from the report and from existing tests. Use `.venv` and project test commands as usual.
-2. **Write a test** that fails on the current code and demonstrates the bug. Place it with related tests following project layout.
-3. **Run** that test and confirm it fails for the expected reason.
-4. **Fix** the implementation with the smallest reasonable change. Respect architecture and `.cursor/rules/` if present.
+1. **Understand** the affected area using the report and existing tests. Use `.venv` and project test commands.
+2. **Write a test** that fails on the current code and reproduces the bug.
+3. **Run** that test and confirm the failure matches the bug.
+4. **Fix** with the smallest reasonable change. Respect architecture and project rules.
 5. **Run** the new test until it passes.
-6. **Run the full test suite** to catch side effects.
-7. **Optional** `pre-commit run -a` if the project relies on it.
+6. **Run the full test suite**.
+7. **Run linter / pre-commit** when the repository uses it.
 
 ## Report
 
-Short and factual: cause, fix, test added or changed, full suite outcome, files touched.
+Brief: root cause, fix, test added or changed, full suite outcome, files touched.

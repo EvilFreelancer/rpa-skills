@@ -2,19 +2,20 @@
 
 ## Purpose
 
-Fix a bug using a **regression test first**: reproduce the failure, fix the code, run the full suite, then give a short factual report.
+Fix a bug: **reproduction test** first, then **fix**, then **full test suite**, then a **short report**.
+
+**You must describe the bug** (expected vs actual, how to reproduce, issue text). **`/rpa-bugfix` alone is not enough.**
 
 ## When to use
 
-- User runs **`/rpa-bugfix`** and describes the bug (expected vs actual, how to reproduce).
-- Ask a clarifying question only when reproduction is impossible without it.
+- User runs **`/rpa-bugfix`** and provides **bug details**.
 
 ## Workflow (summary)
 
-1. Add a test that fails on the current code and captures the bug.
-2. Fix the implementation with minimal scope.
-3. Confirm the new test passes; run **all** tests.
-4. Optional `pre-commit run -a` if the project relies on it.
+1. Write failing test that reproduces the bug.
+2. Fix code; confirm test passes.
+3. Run all tests; run linter or pre-commit when configured.
+4. Short factual report.
 
 ## Contents
 

@@ -2,21 +2,22 @@
 
 ## Purpose
 
-Onboard the agent onto a codebase: read code, documentation, and tests, run the test suite, and return a **short report**. Treats tests as the durable specification of behavior (BDD-oriented: learn expected behavior from executable tests and assertions first).
+Warm up context on a repository: study **code**, read **documentation** and **test code**, **set up the dev environment** the project expects, **run tests**, write a **short report** about the project. No extra brief from the user is required.
 
 ## When to use
 
-- User runs **`/rpa-init`** or asks to understand a repo, warm up context, or produce an onboarding summary.
-- No separate task description is required; the agent discovers `.venv`, pytest (or project-specific runners), and entrypoints.
+- User runs **`/rpa-init`** or asks to onboard / understand a codebase.
 
 ## What the agent does
 
-1. Scan layout, docs, and test configuration.
-2. Run tests (for example `pytest` via `.venv` when present).
-3. Summarize purpose, how tests map to behavior, gaps, and suggested next steps.
+1. Read layout, docs, and tests.
+2. Install or configure dev tooling (venv, deps, documented bootstrap).
+3. Run the test suite.
+4. Summarize purpose, behavior implied by tests, gaps, and next steps.
 
 ## Contents
 
 | File       | Role                          |
 |------------|-------------------------------|
 | `SKILL.md` | Metadata and full workflow    |
+

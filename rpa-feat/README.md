@@ -1,24 +1,26 @@
-# New feature (TDD)
+# New feature (BDD)
 
 ## Purpose
 
-Implement a **new feature** using **TDD**: failing tests first, then implementation, full test run, then documentation updates where behavior or public API changes.
+Add a feature **by BDD**: **plan**, tests (**red**), code (**green**), **full test run**, **docs and examples**, **linter / pre-commit** at the end when the repo uses them.
+
+**You must pass what to build** (for example issue text, acceptance criteria). **`/rpa-feat` alone is not enough.**
 
 ## When to use
 
-- User runs **`/rpa-feat`** and provides a **feature description** (acceptance criteria, edge cases, scope).
-- Ask one clarifying question only when the request is blocking.
+- User runs **`/rpa-feat`** and supplies a **feature description** in the same turn or right after.
 
 ## Workflow (summary)
 
-1. Study existing code, docs, and tests (`.venv` when used).
-2. Short plan (components, contracts, edge cases).
-3. Add tests that fail until the feature exists.
-4. Implement until new tests pass; run **all** tests.
-5. Update docs and examples as needed; optional `pre-commit run -a` if the repo uses it.
+1. Study code, docs, tests.
+2. Plan (components, contracts, edge cases).
+3. Add failing tests, then implementation.
+4. Run all tests; update docs and examples.
+5. Run linter or `pre-commit` when configured.
 
 ## Contents
 
 | File       | Role                    |
 |------------|-------------------------|
 | `SKILL.md` | Metadata and full steps |
+
