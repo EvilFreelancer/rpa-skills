@@ -1,5 +1,6 @@
 ---
 name: logika
+version: 1.0.0
 description: >
   Use when the user needs logical analysis, reasoning chains, or critical thinking
   grounded in classical formal logic (concepts, judgments, syllogisms, induction, fallacies).

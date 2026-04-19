@@ -14,9 +14,8 @@ More rows will be added as new skills are published.
 ## Typical skill layout
 
 - `SKILL.md` - YAML frontmatter and main agent instructions.
-- `references/` - structured notes the agent can load on demand.
 
-The skill directory name should match the `name` field in `SKILL.md` (here both are `logika`).
+The skill directory name should match the `name` field in `SKILL.md`.
 
 ## Making the agent use a skill
 
