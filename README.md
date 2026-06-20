@@ -10,13 +10,14 @@ Motivation: [notes on vibe coding](https://t.me/evilfreelancer/1485) and the pro
 
 ## Skills in this repository
 
-| Folder | `name` in `SKILL.md` | Purpose |
-|--------|----------------------|---------|
-| [rpa-init/](rpa-init/) | `rpa-init` | **`/rpa-init`** - Warm up context on the repo. The agent studies application code, reads docs and test code, sets up the **dev environment** (install tooling the project expects, for example a venv), runs tests, writes a **short project report**. Runs without an extra user brief. |
-| [rpa-gen-rules/](rpa-gen-rules/) | `rpa-gen-rules` | **`/rpa-gen-rules`** - Create or refresh **agent rules**. Bundled examples for **Cursor** (`.cursor/rules/*.mdc`) and **Claude Code** (`.claude/`). Rules encode a **layered approach** (layer 1 with no inward dependencies, then layer 2, and so on) and **BDD-style** development. Runs without an extra user brief. |
-| [rpa-feat/](rpa-feat/) | `rpa-feat` | **`/rpa-feat`** - Add a feature strictly **by BDD**: plan, tests (**red**), implementation (**green**), full test run, update docs and examples, **linter / pre-commit** at the end when the repo uses them. **Requires** a clear task (for example issue text). |
-| [rpa-bugfix/](rpa-bugfix/) | `rpa-bugfix` | **`/rpa-bugfix`** - **Reproduction test** first, then fix, full test run, **short report**. **Requires** a clear bug description. |
-| [logika/](logika/) | `logika` | **`/logika`** - Classical formal logic from G. Chelpanov's textbook (concepts, judgments, syllogisms, induction, fallacies). |
+| `name` | Purpose |
+|--------|---------|
+| [`rpa-init`](rpa-init/) | Warm up context on the repo. The agent studies application code, reads docs and test code, sets up the **dev environment** (install tooling the project expects, for example a venv), runs tests, writes a **short project report**. Runs without an extra user brief. |
+| [`rpa-gen-rules`](rpa-gen-rules/) | Create or refresh **agent rules**. Bundled examples for **Cursor** (`.cursor/rules/*.mdc`) and **Claude Code** (`.claude/`). Rules encode a **layered approach** (layer 1 with no inward dependencies, then layer 2, and so on) and **BDD-style** development. Runs without an extra user brief. |
+| [`rpa-feat`](rpa-feat/) | Add a feature strictly **by BDD**: plan, tests (**red**), implementation (**green**), full test run, update docs and examples, **linter / pre-commit** at the end when the repo uses them. **Requires** a clear task (for example issue text). |
+| [`rpa-bugfix`](rpa-bugfix/) | **Reproduction test** first, then fix, full test run, **short report**. **Requires** a clear bug description. |
+| [`logika`](logika/) | Classical formal logic from G. Chelpanov's textbook (concepts, judgments, syllogisms, induction, fallacies). |
+| [`token-cost`](token-cost/) | Estimate the **floor cost** of a self-hosted LLM token (electricity + hardware amortization), not the market price. Measures power (`nvidia-smi`) and tok/s (streaming benchmark) **on the server**, asks for tariff and hardware cost, prints cost per 1M input/output tokens. |
 
 **Input for `/rpa-*`** - **`/rpa-init`** and **`/rpa-gen-rules`** need no extra briefing. **`/rpa-feat`** and **`/rpa-bugfix`** need you to pass **what** to do (for example issue text), otherwise they will not work correctly.
 
@@ -80,5 +81,5 @@ The directory name must match the `name` field in `SKILL.md`.
 
 ## License
 
-This project is licensed under the MIT License, see the [LICENSE](LICENSE) file in the repository root for details.
+This project is licensed under the MIT License, see the [license](Соцсети/_архив/AiConf/aiconf/sgr-agent-core/sgr-agent-frontend/node_modules/ms/license.md) file in the repository root for details.
 
