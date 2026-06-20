@@ -2,12 +2,13 @@
 name: token-cost
 version: 1.0.0
 description: >
-  Run when the user invokes /token-cost or asks for the real / floor / bedrock /
-  self-cost price of LLM tokens on a self-hosted server (electricity plus hardware
-  amortization, not market API price). The skill measures power draw and generation
-  speed ON the server (nvidia-smi, a streaming benchmark) and asks for the electricity
-  tariff, hardware cost and amortization period, then prints cost per 1M input/output
-  tokens. Use for "сколько на самом деле стоит токен", capacity and break-even planning.
+  Use when the user invokes /token-cost or asks for the floor / bedrock / self-cost /
+  "real" price of LLM tokens on a self-hosted server — the physical lower bound from
+  electricity plus hardware amortization, NOT the market API price. The skill measures
+  power draw and generation speed ON the server (nvidia-smi, streaming benchmark) and
+  asks for electricity tariff, hardware cost and amortization period, then prints cost
+  per 1M input/output tokens. Triggers: "сколько на самом деле стоит токен", "цена
+  самохоста", capacity and break-even planning.
 ---
 
 # Token floor cost
@@ -36,12 +37,14 @@ amortization is the realistic one and is usually the bigger number.
 
 | Input | How to get it |
 |-------|---------------|
-| `P_kW` power | **Measure** while the model is generating: `token_cost.py measure-power`, or `--measure-power` on compute. Falls back to `--power-kw` if you cannot run nvidia-smi. |
-| `R_tok_s` decode + prefill | **Measure** against the running endpoint: `bench_speed.py`. Or read tok/s from the serving engine logs (vLLM/llama.cpp). Else ask the user. |
+| `P_kW` power | **Measure** while the model is generating: `token_cost.py measure-power --overhead-w 150` (overhead = CPU + board + PSU loss, since nvidia-smi only sees GPUs; raise to 200–300 W on heavy Xeon/EPYC). Falls back to `--power-kw` only when nvidia-smi is unreachable. |
+| `R_tok_s` decode + prefill | **Measure** against the running endpoint: `bench_speed.py`. Or read tok/s from the serving engine logs (vLLM/llama.cpp). Else ask the user. **Always two numbers, never one.** |
 | `T_kWh` tariff | **Ask** the user (regional, e.g. ~6.97 RUB/kWh for Saint Petersburg). |
 | `S` hardware cost | **Ask** the user. Omit for an electricity-only floor. |
 | `H_life` years | **Ask**; default 5. |
 | utilization | **Ask**; default 1.0. If the GPU is idle part of the time, amortization per useful token rises (50% busy ⇒ doubles). |
+
+**Do not invent missing numbers.** If you cannot measure `P_kW` or `R_tok_s` and the user has not provided them, STOP and tell the user the exact command from this skill to run. Nameplate TDP, guessed tok/s, and "typical" decode rates are not acceptable substitutes — substituting them produces a number that looks like a floor but isn't.
 
 ## Workflow
 
@@ -74,6 +77,18 @@ python3 scripts/token_cost.py compute --power-kw 0.5 --tariff 6.97 --decode-tok-
 ```
 
 Run any script with `--help` for all flags.
+
+## Reference example (sanity check)
+
+From the source article, 2×RTX 4090 48 GB running GPT-OSS-120B, Saint Petersburg
+tariff ≈ 6.97 RUB/kWh, hardware ≈ 700 000 RUB, 5-year amortization, utilization 1.0:
+
+- ≈ **10.76 RUB / 1M output tokens** — electricity only (the floor of the floor).
+- ≈ **60 RUB / 1M output tokens** — with hardware amortization.
+- Input tokens are roughly an order of magnitude cheaper (prefill ≫ decode).
+
+Use this only as a sanity check against the user's own measurements — never as a
+substitute for them, and never present it as the user's actual cost.
 
 ## Common mistakes
 
