@@ -65,11 +65,53 @@ Copy or adapt `references/claude-examples/.claude/` into a real project root. It
 | **GitHub Copilot** | `.github/copilot-instructions.md` (or policy UI) | Keep instructions short; mirror key bullets from `workflow` and `testing`. |
 | **Generic** | `CONTRIBUTING.md`, `docs/dev-guide.md` | Humans and any agent can read these; duplicate critical agent constraints here if your team does not use Cursor or Claude.
 
-## Single source of truth
+## Single source of truth and mandatory sync
 
-1. Prefer **one canonical place** for TDD workflow text (either `workflow.mdc` for Cursor or `workflow.md` under `.claude/rules/` for Claude Code).
-2. When maintaining **both** Cursor and Claude Code, keep sections aligned by topic; avoid drifting copies.
-3. Point all rules at the **same** test commands (`pytest`, `uv run`, etc.) and config files (`ruff.toml`, `pytest.ini`).
+Different agents read different paths, but the **content** must stay identical. Two mechanisms keep that true:
+
+### Top-level brief: `AGENTS.md` + `CLAUDE.md` symlink
+
+Keep one canonical brief at repo root and make every other agent's top-level filename point at it.
+
+```bash
+# at repo root
+ln -sf AGENTS.md CLAUDE.md
+# verify
+ls -la CLAUDE.md   # should print "CLAUDE.md -> AGENTS.md"
+```
+
+Used in production by `getconf`, `getconf-ui`, and `sdm-client-proxy`. Claude Code reads `CLAUDE.md`, OpenCode / Codex / others read `AGENTS.md`, and Cursor picks up `AGENTS.md` via its docs context - all see the same text.
+
+If a project genuinely needs a Claude-only addendum, put a **short** `.claude/CLAUDE.md` with an `@AGENTS.md` import at the top and only the Claude-specific lines below.
+
+### Per-topic rules: paired files, paired edits
+
+For every topic file you create, generate **both** `.cursor/rules/<topic>.mdc` and `.claude/rules/<topic>.md`. The body is identical; only frontmatter and inline link syntax differ:
+
+| Cursor (`.mdc`) | Claude Code (`.md`) |
+|-----------------|---------------------|
+| `globs: src/**/*.py` + `alwaysApply: true` | `paths: ["src/**/*.py"]` |
+| `alwaysApply: true` (no `globs`) | rule **without** `paths:` (loads every session) |
+| `@architecture.mdc` | `.claude/rules/architecture.md` |
+| `.mdc` extension | `.md` extension |
+
+### "Rules Sync" section is mandatory
+
+Every `workflow` rule must end with a `## Rules Sync` section that makes propagation a mandatory final step of every feature / bugfix pass. The two reference workflow files in this skill (`references/cursor-examples/.cursor/rules/workflow.mdc` and `references/claude-examples/.claude/rules/workflow.md`) already include it - copy that section verbatim and adjust paths.
+
+The agent must, in the same commit / PR:
+
+1. Identify every rule tree present in the repo: `.cursor/rules/`, `.claude/rules/`, root `AGENTS.md` / `CLAUDE.md`, plus any `.kimi/`, `.codex/`, `.github/copilot-instructions.md`.
+2. Locate or create the counterpart of each edited file in every other tree.
+3. Copy the body verbatim; translate frontmatter and links per the table above.
+4. Confirm the `CLAUDE.md -> AGENTS.md` symlink is still valid when `AGENTS.md` changed.
+5. List every synced file in the task report.
+
+Drift is a bug. If one tree leads the other for more than a single commit, the agents start giving contradictory advice on the same codebase.
+
+### Other constants to keep aligned
+
+Point all rules at the **same** test commands (`pytest`, `uv run`, `go test`, `behave`, etc.) and the **same** config files (`ruff.toml`, `pytest.ini`, `pre-commit-config.yaml`). When one of those constants changes, the sync step above must touch every rule file that names it.
 
 ## Bundled examples in this skill
 

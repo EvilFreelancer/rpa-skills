@@ -33,8 +33,25 @@ When the user asks for a new feature (including words like "feature", "add", "im
 
 - Full test run is green.
 - Optional linter or pre-commit is clean when the repo expects it.
-- Report what changed, which tests were added, and results.
+- **Rules sync** (see section below): if any rule under `.claude/rules/` or `.cursor/rules/` (or `AGENTS.md`) changed in this task, mirror the change to the other agent's tree in the same commit.
+- Report what changed, which tests were added, results, and which rule files were synced (if any).
 
 ## Relationship to `implementation-order.md`
 
 That file describes **layers and dependencies**. For **new behavior**, this file wins on order (test first, then code). Use `implementation-order.md` to choose where code belongs in the stack.
+
+## Rules Sync
+
+**MANDATORY** - if any rule file is added or changed in this task, mirror the change to every other agent's rule tree in the same PR. Do not leave one tree ahead of the other.
+
+1. Identify every rule tree in the repo: `.claude/rules/`, `.cursor/rules/`, root `AGENTS.md` / `CLAUDE.md`, plus any other agent roots present (`.kimi/`, `.codex/`, `.github/copilot-instructions.md`).
+2. For each edited file, locate or create its counterpart in every other tree under the same topic name (`workflow`, `testing`, `architecture`, `code-style`, `implementation-order`, `api-layer`, `core-modules`).
+3. Copy the body verbatim, then adapt frontmatter and inline links:
+   - Claude rule **without** `paths:` (always loads) <-> Cursor `globs: <broad>` + `alwaysApply: true`.
+   - Claude `paths: ["src/**/*.py"]` <-> Cursor `globs: src/**/*.py` + `alwaysApply: true`.
+   - Claude `.claude/rules/file.md` references <-> Cursor `@file.mdc` references.
+   - File extension `.md` <-> `.mdc`.
+4. If `AGENTS.md` changed, verify `CLAUDE.md` resolves to the same content (`ls -la CLAUDE.md` shows a symlink to `AGENTS.md`; if not, refresh it or re-create the symlink: `ln -sf AGENTS.md CLAUDE.md`).
+5. Commit both sides together. The report must list every rule file synced.
+
+Skip only when the topic is genuinely tool-specific. When skipping, add a one-line comment in the file that diverges so the divergence is intentional and visible.

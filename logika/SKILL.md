@@ -13,9 +13,17 @@ description: >
 
 This skill equips the agent with a classical formal logic framework (based on G. Chelpanov's textbook) to analyze reasoning step by step.
 
+## Response Format
+
+When answering ANY logical task, you MUST respond with a single JSON object containing exactly two fields:
+- `reasoning`: your step-by-step logical analysis (plain text, no markdown inside)
+- `answer`: the final answer (yes/no for BQA; A/B/C/D for MCQA)
+
+No text before or after the JSON. No markdown code blocks. No explanations outside the JSON.
+
 ## Core Workflow
 
-When given any logical task, follow this chain of thought:
+When given any logical task, follow this chain of thought inside the `reasoning` field:
 
 1. **Identify the objects**: Are we dealing with concepts, judgments, inferences, or proofs?
 2. **Apply the appropriate formal apparatus**: Use the reference files listed below.
@@ -63,7 +71,7 @@ If any rule is violated, the syllogism is invalid. Name the fallacy.
 - Step 2: Check figure. Middle term "metals" is predicate in major, subject in minor → Figure 1.
 - Step 3: Check mode against rules. A-I-I in Figure 1 is Darii, a valid mode.
 - Step 4: Verify 8 rules quickly. Middle distributed? In A premise predicate is not distributed, but subject M is distributed. Rule 3 satisfied. No rule violated.
-**Answer**: Valid syllogism, 1st figure, mode Darii (A-I-I).
+**Answer**: `{"reasoning": "Major premise: All M are P (A). Minor: Some S are M (I). Conclusion: Some S are P (I). Middle term 'metals' is predicate in major, subject in minor → Figure 1. A-I-I in Figure 1 is Darii, valid mode. Middle distributed in major premise (subject of A). No rule violated.", "answer": "yes"}`
 
 ### Pattern B: Detect a logical error
 
@@ -71,7 +79,7 @@ If any rule is violated, the syllogism is invalid. Name the fallacy.
 **Agent thinking**:
 - Step 1: Form. Major: All M are P (A). Minor: No S are M (E). Conclusion: No S are P (E). Figure 2.
 - Step 2: Rule 4 check. Predicate P = "impartial" is not distributed in major premise (predicate of A), but in conclusion it is distributed (predicate of E). This is illicit major (illicit process of the major term).
-**Answer**: Invalid syllogism. Violates Rule 4 — the major term "impartial" is undistributed in the premise but distributed in the conclusion.
+**Answer**: `{"reasoning": "Major: All M are P (A). Minor: No S are M (E). Conclusion: No S are P (E). Figure 2. Predicate P = 'impartial' is not distributed in major premise (predicate of A), but in conclusion it is distributed (predicate of E). This is illicit major (illicit process of the major term).", "answer": "no"}`
 
 ### Pattern C: Immediate inference — conversion
 
@@ -80,7 +88,7 @@ If any rule is violated, the syllogism is invalid. Name the fallacy.
 - Step 1: A-judgment. Predicate "rectangles" is not distributed in A.
 - Step 2: Pure conversion impossible because predicate would become subject of A and thus distributed, which is illicit.
 - Step 3: Convert by limitation (per accidens): "Some rectangles are squares" (I-judgment).
-**Answer**: "Some rectangles are squares."
+**Answer**: `{"reasoning": "A-judgment: All squares are rectangles. Predicate 'rectangles' is not distributed in A. Pure conversion impossible because predicate would become subject and thus distributed, which is illicit. Convert by limitation (per accidens): 'Some rectangles are squares' (I-judgment).", "answer": "Some rectangles are squares."}`
 
 ### Pattern D: Identify the opposition relation
 
@@ -88,7 +96,7 @@ If any rule is violated, the syllogism is invalid. Name the fallacy.
 **Agent thinking**:
 - Step 1: A-judgment vs O-judgment → contradictories.
 - Step 2: By definition of contradiction, if A is true, O must be false.
-**Answer**: The O-judgment is false. A and O are contradictories; they cannot both be true or both false.
+**Answer**: `{"reasoning": "A-judgment vs O-judgment → contradictories. By definition of contradiction, if A is true, O must be false.", "answer": "no"}`
 
 ### Pattern E: Induction — Mill's method
 
@@ -97,4 +105,4 @@ If any rule is violated, the syllogism is invalid. Name the fallacy.
 - Step 1: Multiple cases with varying circumstances (different machines) but one common factor (same lubricant).
 - Step 2: The phenomenon (gear wear) appears in all cases where the common factor is present.
 - Step 3: This matches the Method of Agreement.
-**Answer**: Method of Agreement. The common circumstance (lubricant) is the probable cause of the wear.
+**Answer**: `{"reasoning": "Multiple cases with varying circumstances (different machines) but one common factor (same lubricant). The phenomenon (gear wear) appears in all cases where the common factor is present. This matches the Method of Agreement.", "answer": "Method of Agreement"}`

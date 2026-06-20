@@ -182,10 +182,30 @@ First write a test reproducing this bug, make sure the error actually exists, th
    - All linting checks must pass
    - Fix all errors and warnings
 
-3. **Only then write report**
+3. **Rules sync** (see section below)
+   - If any rule under `.cursor/rules/` or `.claude/rules/` (or `AGENTS.md`) was edited in this task, mirror the change to the other agent's tree in the same commit.
+
+4. **Only then write report**
    - Report must include test results
    - Report must include linter results
    - Report must confirm all checks passed
+   - Report must list synced rule files (if any)
+
+## Rules Sync
+
+**MANDATORY** - if any rule file is added or changed in this task, mirror the change to every other agent's rule tree in the same PR. Do not leave one tree ahead of the other.
+
+1. Identify every rule tree in the repo: `.cursor/rules/`, `.claude/rules/`, root `AGENTS.md` / `CLAUDE.md`, plus any other agent roots present (`.kimi/`, `.codex/`, `.github/copilot-instructions.md`).
+2. For each edited file, locate or create its counterpart in every other tree under the same topic name (`workflow`, `testing`, `architecture`, `code-style`, `implementation-order`, `api-layer`, `core-modules`).
+3. Copy the body verbatim, then adapt frontmatter and inline links:
+   - Cursor `globs:` + `alwaysApply: true` <-> Claude rule **without** `paths:` (always loads).
+   - Cursor `globs: src/**/*.py` + `alwaysApply: true` <-> Claude `paths: ["src/**/*.py"]`.
+   - Cursor `@file.mdc` references <-> Claude `.claude/rules/file.md` references.
+   - File extension `.mdc` <-> `.md`.
+4. If `AGENTS.md` changed, verify `CLAUDE.md` resolves to the same content (`ls -la CLAUDE.md` shows a symlink to `AGENTS.md`; if not, refresh it or re-create the symlink: `ln -sf AGENTS.md CLAUDE.md`).
+5. Commit both sides together. The report must list every rule file synced.
+
+Skip only when the topic is genuinely tool-specific (e.g. a Cursor `@`-context trick with no Claude equivalent). When skipping, add a one-line comment in the file that diverges so the divergence is intentional and visible.
 
 ## References
 
