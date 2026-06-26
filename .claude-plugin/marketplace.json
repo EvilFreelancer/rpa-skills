@@ -1,11 +1,11 @@
 {
   "name": "rpa-skills",
   "owner": {
-    "name": "Pavel Zloi",
+    "name": "Pavel Rykov",
     "email": "paul@drteam.rocks"
   },
   "metadata": {
-    "description": "Pavel Zloi's agent-skills collection for Cursor, Claude Code, OpenAI Codex, Kimi Code CLI and other agents.",
+    "description": "Pavel Rykov's agent-skills collection for Cursor, Claude Code, OpenAI Codex, Kimi Code CLI and other agents.",
     "version": "2.0.0"
   },
   "plugins": [

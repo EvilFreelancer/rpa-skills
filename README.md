@@ -1,6 +1,6 @@
 # RPA Skills
 
-A catalog of [Pavel Zloi](https://t.me/evilfreelancer)'s **agent skills** — reusable instructions and
+A catalog of [Pavel Rykov](https://t.me/evilfreelancer)'s **agent skills** — reusable instructions and
 reference material for AI agents in Cursor, Kimi Code CLI, Claude Code, OpenAI Codex, and so on.
 
 Motivation: [notes on vibe coding](https://t.me/evilfreelancer/1485) and the prompt collection
