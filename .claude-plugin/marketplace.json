@@ -1,0 +1,61 @@
+{
+  "name": "rpa-skills",
+  "owner": {
+    "name": "Pavel Zloi",
+    "email": "paul@drteam.rocks"
+  },
+  "metadata": {
+    "description": "Pavel Zloi's agent-skills collection for Cursor, Claude Code, OpenAI Codex, Kimi Code CLI and other agents.",
+    "version": "2.0.0"
+  },
+  "plugins": [
+    {
+      "name": "rpa-init",
+      "source": { "source": "github", "repo": "EvilFreelancer/rpa-init" },
+      "description": "Warm up context on a repository: study code, docs and tests, set up the dev environment, run tests, write a short report. No extra brief required.",
+      "version": "1.0.0",
+      "category": "workflow",
+      "license": "MIT"
+    },
+    {
+      "name": "rpa-gen-rules",
+      "source": { "source": "github", "repo": "EvilFreelancer/rpa-gen-rules" },
+      "description": "Create or refresh agent project rules (Cursor .mdc, Claude Code .claude/rules). Layered-cake architecture + BDD, with a mandatory Rules Sync step across agent trees.",
+      "version": "1.1.0",
+      "category": "workflow",
+      "license": "MIT"
+    },
+    {
+      "name": "rpa-feat",
+      "source": { "source": "github", "repo": "EvilFreelancer/rpa-feat" },
+      "description": "Add a feature strictly by BDD: plan, red tests, green implementation, full suite, docs and examples, linter at the end. Requires a clear feature description.",
+      "version": "1.0.0",
+      "category": "workflow",
+      "license": "MIT"
+    },
+    {
+      "name": "rpa-bugfix",
+      "source": { "source": "github", "repo": "EvilFreelancer/rpa-bugfix" },
+      "description": "Fix a bug with a reproduction test first, then the fix, then the full suite, then a short report. Requires a clear bug description.",
+      "version": "1.0.0",
+      "category": "workflow",
+      "license": "MIT"
+    },
+    {
+      "name": "logika",
+      "source": { "source": "github", "repo": "EvilFreelancer/logika" },
+      "description": "Classical formal logic from G. Chelpanov's textbook: concepts, judgments, syllogisms, induction, fallacies, laws of thought.",
+      "version": "1.0.0",
+      "category": "reasoning",
+      "license": "MIT"
+    },
+    {
+      "name": "token-cost",
+      "source": { "source": "github", "repo": "EvilFreelancer/token-cost" },
+      "description": "Estimate the floor (self-) cost of a self-hosted LLM token: electricity + hardware amortization, measured on the server. Not the market API price.",
+      "version": "1.0.0",
+      "category": "ops",
+      "license": "MIT"
+    }
+  ]
+}

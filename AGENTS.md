@@ -3,6 +3,10 @@
 This document describes the **standard process** for adding a new agent skill to the repository. Follow the steps
 carefully so that the skill can be discovered, loaded, and used by the OpenCode platform.
 
+## Wording conventions (Russian)
+
+- The Russian adjective for "agent / agentic" is **«агентный»**. Never write **«агентский»** — it is wrong. Examples: «агентный скил», «агентный режим», «агентный воркфлоу» (not «агентский …»).
+
 ## Agent Skills references (read before authoring)
 
 Use these sources so you do not rely on memory alone when designing skills, progressive disclosure, and security:

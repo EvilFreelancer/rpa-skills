@@ -1,85 +1,92 @@
 # RPA Skills
 
-This repository holds [Pavel Zloi](https://t.me/evilfreelancer)'s agent skills - instructions and
+A catalog of [Pavel Zloi](https://t.me/evilfreelancer)'s **agent skills** — reusable instructions and
 reference material for AI agents in Cursor, Kimi Code CLI, Claude Code, OpenAI Codex, and so on.
 
 Motivation: [notes on vibe coding](https://t.me/evilfreelancer/1485) and the prompt collection
-[cursor-vibe-prompts](https://github.com/EvilFreelancer/cursor-vibe-prompts) are packaged here as **skills** so you do not paste the same long instructions into chat every time.
+[cursor-vibe-prompts](https://github.com/EvilFreelancer/cursor-vibe-prompts) are packaged as **skills** so you do not
+paste the same long instructions into chat every time.
 
-**Repository:** [github.com/EvilFreelancer/rpa-skills](https://github.com/EvilFreelancer/rpa-skills)
+> **This repository is now an aggregator (a marketplace catalog).** Each skill has been split into its own
+> repository so it can be versioned, installed, and depended on independently. This repo keeps the catalog
+> ([`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json)), the authoring guide
+> ([`AGENTS.md`](AGENTS.md)), and the links below.
 
-## Skills in this repository
+## Skills
 
-| `name` | Purpose |
-|--------|---------|
-| [`rpa-init`](rpa-init/) | Warm up context on the repo. The agent studies application code, reads docs and test code, sets up the **dev environment** (install tooling the project expects, for example a venv), runs tests, writes a **short project report**. Runs without an extra user brief. |
-| [`rpa-gen-rules`](rpa-gen-rules/) | Create or refresh **agent rules**. Bundled examples for **Cursor** (`.cursor/rules/*.mdc`) and **Claude Code** (`.claude/`). Rules encode a **layered approach** (layer 1 with no inward dependencies, then layer 2, and so on) and **BDD-style** development. Runs without an extra user brief. |
-| [`rpa-feat`](rpa-feat/) | Add a feature strictly **by BDD**: plan, tests (**red**), implementation (**green**), full test run, update docs and examples, **linter / pre-commit** at the end when the repo uses them. **Requires** a clear task (for example issue text). |
-| [`rpa-bugfix`](rpa-bugfix/) | **Reproduction test** first, then fix, full test run, **short report**. **Requires** a clear bug description. |
-| [`logika`](logika/) | Classical formal logic from G. Chelpanov's textbook (concepts, judgments, syllogisms, induction, fallacies). |
-| [`token-cost`](token-cost/) | Estimate the **floor cost** of a self-hosted LLM token (electricity + hardware amortization), not the market price. Measures power (`nvidia-smi`) and tok/s (streaming benchmark) **on the server**, asks for tariff and hardware cost, prints cost per 1M input/output tokens. |
+| `name` | Repository | Purpose |
+|--------|------------|---------|
+| `rpa-init` | [EvilFreelancer/rpa-init](https://github.com/EvilFreelancer/rpa-init) | Warm up context on the repo: study code, docs and test code, set up the **dev environment**, run tests, write a **short project report**. No extra brief. |
+| `rpa-gen-rules` | [EvilFreelancer/rpa-gen-rules](https://github.com/EvilFreelancer/rpa-gen-rules) | Create or refresh **agent rules** for **Cursor** (`.cursor/rules/*.mdc`) and **Claude Code** (`.claude/`). **Layered-cake** architecture + **BDD**, with a mandatory **Rules Sync** step across agent trees. |
+| `rpa-feat` | [EvilFreelancer/rpa-feat](https://github.com/EvilFreelancer/rpa-feat) | Add a feature strictly **by BDD**: plan, tests (**red**), implementation (**green**), full run, docs and examples, **linter** at the end. **Requires** a clear task. |
+| `rpa-bugfix` | [EvilFreelancer/rpa-bugfix](https://github.com/EvilFreelancer/rpa-bugfix) | **Reproduction test** first, then fix, full test run, **short report**. **Requires** a clear bug description. |
+| `logika` | [EvilFreelancer/logika](https://github.com/EvilFreelancer/logika) | Classical formal logic from G. Chelpanov's textbook (concepts, judgments, syllogisms, induction, fallacies). |
+| `token-cost` | [EvilFreelancer/token-cost](https://github.com/EvilFreelancer/token-cost) | Estimate the **floor cost** of a self-hosted LLM token (electricity + hardware amortization), not the market price. |
 
-**Input for `/rpa-*`** - **`/rpa-init`** and **`/rpa-gen-rules`** need no extra briefing. **`/rpa-feat`** and **`/rpa-bugfix`** need you to pass **what** to do (for example issue text), otherwise they will not work correctly.
+**Input for `/rpa-*`** — `/rpa-init` and `/rpa-gen-rules` need no extra briefing. `/rpa-feat` and `/rpa-bugfix`
+need you to pass **what** to do (for example issue text), otherwise they will not work correctly.
 
-Each skill folder has its own **README.md** with details.
+Each skill repository has its own **README.md** with usage, install, and attribution.
+
+## Install
+
+### The whole catalog (Claude Code)
+
+Add this repo as a plugin marketplace, then install any skill from it:
+
+```text
+/plugin marketplace add EvilFreelancer/rpa-skills
+/plugin install rpa-init@rpa-skills
+/plugin install logika@rpa-skills
+# ...and so on
+```
+
+> The catalog points at the per-skill repositories listed above. Make sure those repositories exist and are
+> pushed (they are split out from this one), then the marketplace entries resolve.
+
+### A single skill
+
+Each skill is also a self-contained plugin repo. Install one directly:
+
+```text
+/plugin marketplace add EvilFreelancer/<name>
+/plugin install <name>@<name>
+```
+
+Or copy/symlink its `skills/<name>/` folder into a skill root (`~/.claude/skills/`, `~/.cursor/skills/`,
+`~/.codex/skills/`, `~/.kimi/skills/`). The directory name must match the `name` field in `SKILL.md`.
 
 ## Typical skill layout
 
-- `SKILL.md` - YAML frontmatter (`name`, `version`, `description`) and main agent instructions.
-- `README.md` - Human overview (recommended).
-- Optional `references/`, `scripts/`, or other assets.
+```
+<skill>/
+├─ .claude-plugin/
+│  ├─ plugin.json        # plugin manifest (name, version, description)
+│  └─ marketplace.json   # single-plugin marketplace (source ".")
+├─ skills/<name>/
+│  ├─ SKILL.md           # YAML frontmatter + agent instructions (canonical)
+│  └─ references/ | scripts/   # optional bundled assets
+├─ SKILL.md              # copy of skills/<name>/SKILL.md for display / direct-copy install
+├─ README.md             # human overview
+└─ LICENSE
+```
 
-The skill directory name should match the `name` field in `SKILL.md`. The `rpa-*` skills use hyphenated directory names to match slash commands such as `/rpa-init`.
+The skill directory name should match the `name` field in `SKILL.md`. The `rpa-*` skills use hyphenated
+directory names to match slash commands such as `/rpa-init`.
 
 ## Making the agent use a skill
 
-In **Agent** chat (not only Inline Edit), you can pull a skill into the run in several ways.
+1. **Slash command** — type `/` in agent chat and pick the skill by its **`name`**, or type it directly,
+   e.g. `/logika` or `/rpa-init`.
+2. **`@` context** — type `@` and attach the skill (or its folder / `SKILL.md`) to ground the message.
+3. **Automatic selection** — the agent may load a skill on its own when your request matches the
+   **`description`** in `SKILL.md`, so clear trigger wording in that field helps.
 
-1. **Slash command** - type `/` in the chat input. Cursor shows available commands; pick the skill by its **`name`**
-   from `SKILL.md`, or type it directly, e.g. **`/logika`** or **`/rpa-init`**.
-2. **`@` context** - type `@` and attach the skill (or the skill folder / `SKILL.md`) so that message is grounded in
-   that skill's instructions.
-3. **Automatic selection** - the agent may load a skill on its own when your request matches the **`description`** in
-   `SKILL.md`, so clear trigger wording in that field helps.
+## Authoring new skills
 
-## Installation by environment
-
-Put the skill directory into one of the standard skill roots for your tool. Paths below are typical; check your CLI
-version if something differs.
-
-### Cursor
-
-- **User-wide** - `~/.cursor/skills/<name>/`.
-- **Project-only** - `<repo-root>/.cursor/skills/<name>/`.
-
-You can copy this repository's `<name>/` folder as-is, or symlink it. Skills are discovered from these locations
-per [Agent Skills](https://cursor.com/docs/context/skills).
-
-### Kimi Code CLI
-
-Layered skill roots are supported. Common choices:
-
-- User - `~/.kimi/skills/<name>/` or `~/.config/agents/skills/<name>/`.
-- Project - `.kimi/skills/<name>/` at the repository root.
-
-You can also pass extra directories with `--skills-dir` (repeatable). See
-the [Kimi Code CLI skills docs](https://moonshotai.github.io/kimi-cli/en/customization/skills.html).
-
-### Claude Code
-
-- User - `~/.claude/skills/<name>/`.
-- Project - `.claude/skills/<name>/`.
-
-Copy or symlink the `<name>/` directory under one of these paths.
-
-### OpenAI Codex (CLI / agent)
-
-- User - `~/.codex/skills/<name>/`.
-- Project - `.codex/skills/<name>/`.
-
-The directory name must match the `name` field in `SKILL.md`.
+See [`AGENTS.md`](AGENTS.md) for the standard process (directory structure, mandatory `SKILL.md` frontmatter,
+documentation, testing, commit guidelines).
 
 ## License
 
-This project is licensed under the MIT License, see the [license](Соцсети/_архив/AiConf/aiconf/sgr-agent-core/sgr-agent-frontend/node_modules/ms/license.md) file in the repository root for details.
-
+MIT — see [LICENSE](LICENSE). Each split-out skill repository carries its own copy of the same license.
