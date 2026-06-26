@@ -46,33 +46,33 @@ Add this repo as a plugin marketplace, then install any skill from it:
 
 ### A single skill
 
-Each skill is also a self-contained plugin repo. Install one directly:
+Install just one skill from the same catalog — add the catalog once, then install only what you need:
 
 ```text
-/plugin marketplace add EvilFreelancer/<name>
-/plugin install <name>@<name>
+/plugin marketplace add EvilFreelancer/rpa-skills
+/plugin install <name>@rpa-skills
 ```
 
-Or copy/symlink its `skills/<name>/` folder into a skill root (`~/.claude/skills/`, `~/.cursor/skills/`,
-`~/.codex/skills/`, `~/.kimi/skills/`). The directory name must match the `name` field in `SKILL.md`.
+Or copy/symlink a skill's repository into a skill root (`~/.claude/skills/`, `~/.cursor/skills/`,
+`~/.codex/skills/`, `~/.kimi/skills/`). Each skill repo keeps its `SKILL.md` at the repo root, so copy the
+repository as `<name>/`. The directory name must match the `name` field in `SKILL.md`.
 
 ## Typical skill layout
 
 ```
 <skill>/
 ├─ .claude-plugin/
-│  ├─ plugin.json        # plugin manifest (name, version, description)
-│  └─ marketplace.json   # single-plugin marketplace (source ".")
-├─ skills/<name>/
-│  ├─ SKILL.md           # YAML frontmatter + agent instructions (canonical)
-│  └─ references/ | scripts/   # optional bundled assets
-├─ SKILL.md              # copy of skills/<name>/SKILL.md for display / direct-copy install
+│  └─ plugin.json        # plugin manifest (name, version, description) — no skills field
+├─ SKILL.md              # YAML frontmatter + agent instructions (canonical, loaded from the repo root)
+├─ references/ | scripts/   # optional bundled assets, referenced relative to SKILL.md
 ├─ README.md             # human overview
 └─ LICENSE
 ```
 
-The skill directory name should match the `name` field in `SKILL.md`. The `rpa-*` skills use hyphenated
-directory names to match slash commands such as `/rpa-init`.
+A plugin with `SKILL.md` at the repo root, no `skills/` directory, and no `skills` field in `plugin.json`
+is loaded by Claude Code (v2.1.142+) as a single-skill plugin; the invocation name comes from the `name`
+field in `SKILL.md`. That name should match the slash command — the `rpa-*` skills use hyphenated names
+such as `/rpa-init`.
 
 ## Making the agent use a skill
 
