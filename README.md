@@ -14,14 +14,14 @@ paste the same long instructions into chat every time.
 
 ## Skills
 
-| `name` | Repository | Purpose |
-|--------|------------|---------|
-| `rpa-init` | [EvilFreelancer/rpa-init](https://github.com/EvilFreelancer/rpa-init) | Warm up context on the repo: study code, docs and test code, set up the **dev environment**, run tests, write a **short project report**. No extra brief. |
-| `rpa-gen-rules` | [EvilFreelancer/rpa-gen-rules](https://github.com/EvilFreelancer/rpa-gen-rules) | Create or refresh **agent rules** for **Cursor** (`.cursor/rules/*.mdc`) and **Claude Code** (`.claude/`). **Layered-cake** architecture + **BDD**, with a mandatory **Rules Sync** step across agent trees. |
-| `rpa-feat` | [EvilFreelancer/rpa-feat](https://github.com/EvilFreelancer/rpa-feat) | Add a feature strictly **by BDD**: plan, tests (**red**), implementation (**green**), full run, docs and examples, **linter** at the end. **Requires** a clear task. |
-| `rpa-bugfix` | [EvilFreelancer/rpa-bugfix](https://github.com/EvilFreelancer/rpa-bugfix) | **Reproduction test** first, then fix, full test run, **short report**. **Requires** a clear bug description. |
-| `logika` | [EvilFreelancer/logika](https://github.com/EvilFreelancer/logika) | Classical formal logic from G. Chelpanov's textbook (concepts, judgments, syllogisms, induction, fallacies). |
-| `token-cost` | [EvilFreelancer/token-cost](https://github.com/EvilFreelancer/token-cost) | Estimate the **floor cost** of a self-hosted LLM token (electricity + hardware amortization), not the market price. |
+| Skill | Purpose |
+|-------|---------|
+| [/rpa-init](https://github.com/EvilFreelancer/rpa-init) | Warm up context on the repo: study code, docs and test code, set up the **dev environment**, run tests, write a **short project report**. No extra brief. |
+| [/rpa-gen-rules](https://github.com/EvilFreelancer/rpa-gen-rules) | Create or refresh **agent rules** for **Cursor** (`.cursor/rules/*.mdc`) and **Claude Code** (`.claude/`). **Layered-cake** architecture + **BDD**, with a mandatory **Rules Sync** step across agent trees. |
+| [/rpa-feat](https://github.com/EvilFreelancer/rpa-feat) | Add a feature strictly **by BDD**: plan, tests (**red**), implementation (**green**), full run, docs and examples, **linter** at the end. **Requires** a clear task. |
+| [/rpa-bugfix](https://github.com/EvilFreelancer/rpa-bugfix) | **Reproduction test** first, then fix, full test run, **short report**. **Requires** a clear bug description. |
+| [/logika](https://github.com/EvilFreelancer/logika) | Classical formal logic from G. Chelpanov's textbook (concepts, judgments, syllogisms, induction, fallacies). |
+| [/token-cost](https://github.com/EvilFreelancer/token-cost) | Estimate the **floor cost** of a self-hosted LLM token (electricity + hardware amortization), not the market price. |
 
 **Input for `/rpa-*`** — `/rpa-init` and `/rpa-gen-rules` need no extra briefing. `/rpa-feat` and `/rpa-bugfix`
 need you to pass **what** to do (for example issue text), otherwise they will not work correctly.
