@@ -22,6 +22,7 @@ paste the same long instructions into chat every time.
 | [/rpa-bugfix](https://github.com/EvilFreelancer/rpa-bugfix) | **Reproduction test** first, then fix, full test run, **short report**. **Requires** a clear bug description. |
 | [/logika](https://github.com/EvilFreelancer/logika) | Classical formal logic from G. Chelpanov's textbook (concepts, judgments, syllogisms, induction, fallacies). |
 | [/token-cost](https://github.com/EvilFreelancer/token-cost) | Estimate the **floor cost** of a self-hosted LLM token (electricity + hardware amortization), not the market price. |
+| [/mikrotik-config-gen](https://github.com/EvilFreelancer/mikrotik-config-gen) | Generate secure **MikroTik RouterOS v7** configs from plain language, or **review and harden** an existing `/export`. Hardening baseline, four presets, per-model device reference, offline validator. |
 
 **Input for `/rpa-*`** — `/rpa-init` and `/rpa-gen-rules` need no extra briefing. `/rpa-feat` and `/rpa-bugfix`
 need you to pass **what** to do (for example issue text), otherwise they will not work correctly.
