@@ -8,8 +8,10 @@ Motivation: [notes on vibe coding](https://t.me/evilfreelancer/1485) and the pro
 paste the same long instructions into chat every time.
 
 > **This repository is now an aggregator (a marketplace catalog).** Each skill has been split into its own
-> repository so it can be versioned, installed, and depended on independently. This repo keeps the catalog
-> ([`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json)), the authoring guide
+> repository so it can be versioned, installed, and depended on independently. This repo keeps the catalog in
+> two marketplace manifests — [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) for Claude
+> Code and [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) for Codex — plus an
+> [`install.sh`](install.sh) for folder-based agents like Cursor, the authoring guide
 > ([`AGENTS.md`](AGENTS.md)), and the links below.
 
 ## Skills
@@ -31,7 +33,19 @@ Each skill repository has its own **README.md** with usage, install, and attribu
 
 ## Install
 
-### The whole catalog (Claude Code)
+This catalog ships **two marketplace manifests** so it can be connected as a marketplace from more than one
+agent, plus a plain installer script for agents that have no remote marketplace at all:
+
+| File | Consumed by | How you connect it |
+|------|-------------|--------------------|
+| [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) | **Claude Code** (also read by Codex as a legacy fallback) | `/plugin marketplace add EvilFreelancer/rpa-skills` |
+| [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) | **Codex** | `codex plugin marketplace add EvilFreelancer/rpa-skills` |
+| [`install.sh`](install.sh) | **Cursor** and any folder-based agent | clones skills into `~/.agents/skills/` |
+
+> All three point at the per-skill repositories listed above. Make sure those repositories exist and are
+> pushed (they are split out from this one), then the entries resolve.
+
+### Claude Code
 
 Add this repo as a plugin marketplace, then install any skill from it:
 
@@ -42,21 +56,46 @@ Add this repo as a plugin marketplace, then install any skill from it:
 # ...and so on
 ```
 
-> The catalog points at the per-skill repositories listed above. Make sure those repositories exist and are
-> pushed (they are split out from this one), then the marketplace entries resolve.
+### Codex
 
-### A single skill
+Codex has its own repo marketplace. Add this catalog, then browse/install from `/plugins`:
 
-Install just one skill from the same catalog — add the catalog once, then install only what you need:
-
-```text
-/plugin marketplace add EvilFreelancer/rpa-skills
-/plugin install <name>@rpa-skills
+```bash
+codex plugin marketplace add EvilFreelancer/rpa-skills
+codex plugin marketplace list        # verify it resolved
+# then in the CLI: run `codex`, open `/plugins`, pick the "RPA Skills" tab, install what you need
 ```
 
-Or copy/symlink a skill's repository into a skill root (`~/.claude/skills/`, `~/.cursor/skills/`,
-`~/.codex/skills/`, `~/.kimi/skills/`). Each skill repo keeps its `SKILL.md` at the repo root, so copy the
-repository as `<name>/`. The directory name must match the `name` field in `SKILL.md`.
+Codex reads [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json). It can also read the
+Claude manifest above as a legacy-compatible source, so either entry point works.
+
+### Cursor (and other folder-based agents)
+
+Cursor has **no remote plugin marketplace** — it discovers skills only from directories (`.agents/skills/`,
+`.cursor/skills/`, and their `~/` globals). So instead of "connecting" the catalog, you install the skill
+folders into a skills root the agent reads:
+
+```bash
+# install/update the whole catalog into ~/.agents/skills (read by Cursor and Codex)
+curl -fsSL https://raw.githubusercontent.com/EvilFreelancer/rpa-skills/main/install.sh | bash
+
+# or clone the repo and run it, optionally targeting a specific root / subset
+git clone https://github.com/EvilFreelancer/rpa-skills && cd rpa-skills
+./install.sh                       # -> ~/.agents/skills
+./install.sh -d ~/.cursor/skills   # -> a Cursor-specific root
+./install.sh logika rpa-init       # only the named skills
+```
+
+Then reload the Cursor window (`Cmd/Ctrl+Shift+P` → *Developer: Reload Window*).
+
+### A single skill, by hand
+
+Every skill repo keeps its `SKILL.md` at the repo root, so you can clone one straight into a skills root.
+The directory name must match the `name` field in `SKILL.md`:
+
+```bash
+git clone https://github.com/EvilFreelancer/logika ~/.agents/skills/logika
+```
 
 ## Typical skill layout
 
@@ -83,10 +122,12 @@ such as `/rpa-init`.
 3. **Automatic selection** — the agent may load a skill on its own when your request matches the
    **`description`** in `SKILL.md`, so clear trigger wording in that field helps.
 
-## Authoring new skills
+## Maintaining the catalog
 
-See [`AGENTS.md`](AGENTS.md) for the standard process (directory structure, mandatory `SKILL.md` frontmatter,
-documentation, testing, commit guidelines).
+See [`AGENTS.md`](AGENTS.md) for the collection-wide process: how the two marketplace manifests, the Skills
+table, and `install.sh` mirror each skill's metadata, and the **sync rule** to follow when a skill bumps its
+version, description, or tags. For authoring an individual skill, see the `AGENTS.md` in that skill's own
+repository.
 
 ## License
 

@@ -1,0 +1,68 @@
+{
+  "name": "rpa-skills",
+  "interface": {
+    "displayName": "RPA Skills"
+  },
+  "metadata": {
+    "description": "Pavel Rykov's agent-skills collection for Codex, Claude Code, Cursor and other agents.",
+    "version": "2.1.0"
+  },
+  "plugins": [
+    {
+      "name": "rpa-init",
+      "source": { "source": "url", "url": "https://github.com/EvilFreelancer/rpa-init.git", "ref": "main" },
+      "description": "Warm up context on a repository: study code, docs and tests, set up the dev environment, run tests, write a short report. No extra brief required.",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Developer Tools",
+      "license": "MIT"
+    },
+    {
+      "name": "rpa-gen-rules",
+      "source": { "source": "url", "url": "https://github.com/EvilFreelancer/rpa-gen-rules.git", "ref": "main" },
+      "description": "Create or refresh agent project rules (Cursor .mdc, Claude Code .claude/rules). Layered-cake architecture + BDD, with a mandatory Rules Sync step across agent trees.",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Developer Tools",
+      "license": "MIT"
+    },
+    {
+      "name": "rpa-feat",
+      "source": { "source": "url", "url": "https://github.com/EvilFreelancer/rpa-feat.git", "ref": "main" },
+      "description": "Add a feature strictly by BDD: plan, red tests, green implementation, full suite, docs and examples, linter at the end. Requires a clear feature description.",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Developer Tools",
+      "license": "MIT"
+    },
+    {
+      "name": "rpa-bugfix",
+      "source": { "source": "url", "url": "https://github.com/EvilFreelancer/rpa-bugfix.git", "ref": "main" },
+      "description": "Fix a bug with a reproduction test first, then the fix, then the full suite, then a short report. Requires a clear bug description.",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Developer Tools",
+      "license": "MIT"
+    },
+    {
+      "name": "logika",
+      "source": { "source": "url", "url": "https://github.com/EvilFreelancer/logika.git", "ref": "main" },
+      "description": "Classical formal logic from G. Chelpanov's textbook: concepts, judgments, syllogisms, induction, fallacies, laws of thought.",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Reasoning",
+      "license": "MIT"
+    },
+    {
+      "name": "token-cost",
+      "source": { "source": "url", "url": "https://github.com/EvilFreelancer/token-cost.git", "ref": "main" },
+      "description": "Estimate the floor (self-) cost of a self-hosted LLM token: electricity + hardware amortization, measured on the server. Not the market API price.",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Ops",
+      "license": "MIT"
+    },
+    {
+      "name": "mikrotik-config-gen",
+      "source": { "source": "url", "url": "https://github.com/EvilFreelancer/mikrotik-config-gen.git", "ref": "main" },
+      "description": "Generate secure MikroTik RouterOS v7 configs from plain language, or review and harden an existing /export. Hardening baseline, four presets, per-model device reference, offline validator.",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Networking",
+      "license": "MIT"
+    }
+  ]
+}
