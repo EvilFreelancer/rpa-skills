@@ -5,7 +5,7 @@
     "email": "paul@drteam.rocks"
   },
   "metadata": {
-    "description": "Pavel Rykov's agent-skills collection for Cursor, Claude Code, OpenAI Codex, Kimi Code CLI and other agents.",
+    "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
     "version": "2.1.0"
   },
   "plugins": [
