@@ -4,7 +4,7 @@
     "displayName": "RPA Skills"
   },
   "metadata": {
-    "description": "Pavel Rykov's agent-skills collection for Codex, Claude Code, Cursor and other agents.",
+    "description": "Pavel Rykov's agent-skills marketplace for Codex, Claude Code, Cursor and other agents.",
     "version": "2.1.0"
   },
   "plugins": [

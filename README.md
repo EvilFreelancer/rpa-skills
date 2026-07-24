@@ -1,13 +1,14 @@
 # RPA Skills
 
-A catalog of [Pavel Rykov](https://t.me/evilfreelancer)'s **agent skills** — reusable instructions and
-reference material for AI agents in Cursor, Kimi Code CLI, Claude Code, OpenAI Codex, and so on.
+[Pavel Rykov](https://t.me/evilfreelancer)'s **agent-skills marketplace** — a plugin catalog for AI agents
+in Claude Code, OpenAI Codex, Cursor, Kimi Code CLI, and so on. Connect the marketplace with one command
+and install any skill from it, or install every skill on its own.
 
 Motivation: [notes on vibe coding](https://t.me/evilfreelancer/1485) and the prompt collection
 [cursor-vibe-prompts](https://github.com/EvilFreelancer/cursor-vibe-prompts) are packaged as **skills** so you do not
 paste the same long instructions into chat every time.
 
-> **This repository is now an aggregator (a marketplace catalog).** Each skill has been split into its own
+> **This repository is the marketplace itself, not the skills.** Each skill lives in its own
 > repository so it can be versioned, installed, and depended on independently. This repo keeps the catalog in
 > two marketplace manifests — [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) for Claude
 > Code and [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) for Codex — plus an
