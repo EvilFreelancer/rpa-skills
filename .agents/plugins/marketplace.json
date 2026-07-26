@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Codex, Claude Code, Cursor and other agents.",
-    "version": "2.1.0"
+    "version": "2.2.0"
   },
   "plugins": [
     {
@@ -62,6 +62,14 @@
       "description": "Generate secure MikroTik RouterOS v7 configs from plain language, or review and harden an existing /export. Hardening baseline, four presets, per-model device reference, offline validator.",
       "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
       "category": "Networking",
+      "license": "MIT"
+    },
+    {
+      "name": "screenshotting-gui",
+      "source": { "source": "url", "url": "https://github.com/EvilFreelancer/screenshotting-gui.git", "ref": "main" },
+      "description": "Capture clean, repeatable screenshots of a GUI desktop app (IDEs, browsers, native apps) on an isolated Xvfb display: drive it with python-Xlib, capture with ImageMagick, annotate with a highlight box, crop or arrow. Never touches the operator's live desktop.",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Ops",
       "license": "MIT"
     }
   ]

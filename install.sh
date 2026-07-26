@@ -34,6 +34,7 @@ ALL_SKILLS=(
   logika
   token-cost
   mikrotik-config-gen
+  screenshotting-gui
 )
 
 usage() {
