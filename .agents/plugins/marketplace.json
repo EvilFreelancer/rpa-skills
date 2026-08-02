@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Codex, Claude Code, Cursor and other agents.",
-    "version": "2.2.0"
+    "version": "2.2.1"
   },
   "plugins": [
     {
@@ -19,7 +19,7 @@
     {
       "name": "rpa-gen-rules",
       "source": { "source": "url", "url": "https://github.com/EvilFreelancer/rpa-gen-rules.git", "ref": "main" },
-      "description": "Create or refresh agent project rules (Cursor .mdc, Claude Code .claude/rules). Layered-cake architecture + BDD, with a mandatory Rules Sync step across agent trees.",
+      "description": "Create or refresh agent project rules (Cursor .mdc, Claude Code .claude/rules). Layered-cake architecture + BDD, with a mandatory Rules Sync step across agent trees. Rules and AGENTS.md in English unless asked otherwise.",
       "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
       "category": "Developer Tools",
       "license": "MIT"

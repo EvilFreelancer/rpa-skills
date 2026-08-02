@@ -38,10 +38,10 @@ Nothing is allowed to drift.
 
 | Changed in the skill repo | Update here |
 |---------------------------|-------------|
-| **version** bump | `.claude-plugin/marketplace.json` → the plugin's `version`. Codex manifest only if its entry pins a `ref`/`sha` (see below). Bump top-level `metadata.version` if this is a catalog release. |
+| **version** bump | `.claude-plugin/marketplace.json` → the plugin's `version`. Codex manifest only if its entry pins a `ref`/`sha` (see below). **Always** patch-bump the top-level `metadata.version` in both manifests (`2.2.0` → `2.2.1`). |
 | **description** | `description` in **both** manifests **and** the README Skills-table row. |
 | **tags / category** | `category` in **both** manifests. |
-| **new skill added** | add an entry to **both** manifests, a README table row, the `install.sh` `ALL_SKILLS` array, and bump `metadata.version`. |
+| **new skill added** | add an entry to **both** manifests, a README table row, the `install.sh` `ALL_SKILLS` array, and **minor**-bump `metadata.version`. |
 | **skill removed / renamed** | remove or rename it in **all four** places above. |
 
 ### Version sync — the two manifests behave differently
@@ -53,9 +53,12 @@ Nothing is allowed to drift.
   - entry pinned to a moving branch (`"ref": "main"`, the current default) → it auto-follows the skill repo,
     **nothing to bump**;
   - entry pinned to a **tag or `sha`** for reproducibility → update that `ref`/`sha` on every release.
-- The top-level **`metadata.version`** (present in both manifests) is the **catalog** version. Bump it when
-  the catalog changes shape (a skill is added/removed), independently of any single skill's version. Keep it
-  identical in both manifests.
+- The top-level **`metadata.version`** (present in both manifests) is the **catalog** version, and it must
+  move on **every** catalog change. Keep it identical in both manifests:
+  - **patch** bump (`2.2.0` → `2.2.1`) when a skill's `version` or `description` is mirrored here. One patch
+    per sync commit, even when several skills are mirrored at once;
+  - **minor** bump (`2.2.1` → `2.3.0`) when the catalog changes shape - a skill added, removed, or renamed;
+  - **major** bump when the manifest format itself changes in a way installers must adapt to.
 
 ### Worked example — releasing `rpa-init` 1.1.0
 
@@ -66,7 +69,8 @@ Nothing is allowed to drift.
      it at the new release; if it points at `main`, nothing to do.
    - `README.md` — update the `rpa-init` row only if its purpose/description changed.
    - `install.sh` — no change (it clones by repo name, not by version).
-   - Bump `metadata.version` only if you also consider this a catalog release.
+   - `metadata.version` — patch-bump it in **both** manifests (`2.2.0` → `2.2.1`); mirroring a skill is a
+     catalog release too.
 3. Validate and commit (below).
 
 ## Adding a new skill to the catalog
@@ -78,7 +82,7 @@ Nothing is allowed to drift.
    Codex entry: `source: {source:"url", url:"https://github.com/EvilFreelancer/<name>.git", ref:"main"}` plus
    `policy` + `category`.
 3. Add a row to the README **Skills** table and add `<name>` to `install.sh`'s `ALL_SKILLS`.
-4. Bump `metadata.version` in both manifests.
+4. Minor-bump `metadata.version` in both manifests.
 
 ## Validate before committing
 
@@ -107,7 +111,8 @@ PY
 - [ ] Both manifests updated — `version` where applicable, `description`, `category`.
 - [ ] README **Skills** table row updated.
 - [ ] `install.sh` `ALL_SKILLS` updated if a skill was added / removed / renamed.
-- [ ] `metadata.version` bumped (and identical in both manifests) if the catalog shape changed.
+- [ ] `metadata.version` bumped and identical in both manifests — patch for a mirrored skill release, minor
+      when the catalog shape changed.
 - [ ] JSON validates and the skill lists match across both manifests + `install.sh`.
 - [ ] Conventional commit, e.g. `chore(catalog): sync rpa-init 1.1.0`.
 
