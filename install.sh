@@ -35,6 +35,7 @@ ALL_SKILLS=(
   token-cost
   mikrotik-config-gen
   screenshotting-gui
+  gpu-server-setup
 )
 
 usage() {

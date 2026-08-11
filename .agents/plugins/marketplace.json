@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Codex, Claude Code, Cursor and other agents.",
-    "version": "2.2.1"
+    "version": "2.3.0"
   },
   "plugins": [
     {
@@ -68,6 +68,14 @@
       "name": "screenshotting-gui",
       "source": { "source": "url", "url": "https://github.com/EvilFreelancer/screenshotting-gui.git", "ref": "main" },
       "description": "Capture clean, repeatable screenshots of a GUI desktop app (IDEs, browsers, native apps) on an isolated Xvfb display: drive it with python-Xlib, capture with ImageMagick, annotate with a highlight box, crop or arrow. Never touches the operator's live desktop.",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Ops",
+      "license": "MIT"
+    },
+    {
+      "name": "gpu-server-setup",
+      "source": { "source": "url", "url": "https://github.com/EvilFreelancer/gpu-server-setup.git", "ref": "main" },
+      "description": "Prepare a Linux server with NVIDIA GPUs for LLM and neural-network workloads: NVIDIA driver + CUDA from the official repo, Docker + NVIDIA Container Toolkit, staged verification gates, ready compose presets for vLLM, Infinity, OpenWebUI and Ollama.",
       "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
       "category": "Ops",
       "license": "MIT"
