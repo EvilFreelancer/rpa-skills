@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
-    "version": "2.3.0"
+    "version": "2.3.1"
   },
   "plugins": [
     {
@@ -76,8 +76,8 @@
     {
       "name": "gpu-server-setup",
       "source": { "source": "github", "repo": "EvilFreelancer/gpu-server-setup" },
-      "description": "Prepare a Linux server with NVIDIA GPUs for LLM and neural-network workloads: NVIDIA driver + CUDA from the official repo, Docker + NVIDIA Container Toolkit, staged verification gates, ready compose presets for vLLM, Infinity, OpenWebUI and Ollama.",
-      "version": "0.1.0",
+      "description": "Prepare a Linux server with NVIDIA GPUs for LLM and neural-network workloads: NVIDIA driver + CUDA from the official repo, Docker + NVIDIA Container Toolkit as the mandatory base, staged verification gates, optional compose presets for vLLM, Infinity, OpenWebUI and Ollama (llama.cpp via its official image), and GPU power-limit setup persisted via systemd.",
+      "version": "0.2.0",
       "category": "ops",
       "license": "MIT"
     }
