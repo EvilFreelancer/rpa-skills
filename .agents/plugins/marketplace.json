@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Codex, Claude Code, Cursor and other agents.",
-    "version": "2.3.2"
+    "version": "2.4.0"
   },
   "plugins": [
     {
@@ -76,6 +76,14 @@
       "name": "gpu-server-setup",
       "source": { "source": "url", "url": "https://github.com/EvilFreelancer/gpu-server-setup.git", "ref": "main" },
       "description": "Prepare a Linux server with NVIDIA GPUs for LLM and neural-network workloads: NVIDIA driver + CUDA from the official repo, Docker + NVIDIA Container Toolkit as the mandatory base, staged verification gates, optional compose presets for vLLM, Infinity, OpenWebUI and Ollama (llama.cpp via its official image), and GPU power-limit setup persisted via systemd.",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Ops",
+      "license": "MIT"
+    },
+    {
+      "name": "rdp-agent",
+      "source": { "source": "url", "url": "https://github.com/EvilFreelancer/rdp-agent.git", "ref": "main" },
+      "description": "Drive a remote Windows machine over RDP from an AI agent: the RDP client runs on an isolated Xvfb display, the operator watches the same screen in a VNC window and can take over by hand, the session survives between agent turns, and lock screens are recovered by an NLA reconnect instead of typing the password.",
       "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
       "category": "Ops",
       "license": "MIT"
