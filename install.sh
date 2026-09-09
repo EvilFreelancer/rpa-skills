@@ -36,6 +36,7 @@ ALL_SKILLS=(
   mikrotik-config-gen
   screenshotting-gui
   gpu-server-setup
+  rdp-agent
 )
 
 usage() {
