@@ -6,86 +6,126 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
-    "version": "2.4.2"
+    "version": "2.4.3"
   },
   "plugins": [
     {
       "name": "rpa-init",
-      "source": { "source": "github", "repo": "EvilFreelancer/rpa-init" },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/rpa-init.git",
+        "ref": "main"
+      },
       "description": "Warm up context on a repository: study code, docs and tests, set up the dev environment, run tests, write a short report. No extra brief required.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "category": "workflow",
       "license": "MIT"
     },
     {
       "name": "rpa-gen-rules",
-      "source": { "source": "github", "repo": "EvilFreelancer/rpa-gen-rules" },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/rpa-gen-rules.git",
+        "ref": "main"
+      },
       "description": "Create or refresh agent project rules (Cursor .mdc, Claude Code .claude/rules, Codex .codex hook bridge that auto-attaches Cursor rules by glob). Layered-cake architecture + BDD, with a mandatory Rules Sync step across agent trees. Rules and AGENTS.md in English unless asked otherwise.",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "category": "workflow",
       "license": "MIT"
     },
     {
       "name": "rpa-feat",
-      "source": { "source": "github", "repo": "EvilFreelancer/rpa-feat" },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/rpa-feat.git",
+        "ref": "main"
+      },
       "description": "Add a feature strictly by BDD: plan, red tests, green implementation, full suite, docs and examples, linter at the end. Requires a clear feature description.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "category": "workflow",
       "license": "MIT"
     },
     {
       "name": "rpa-bugfix",
-      "source": { "source": "github", "repo": "EvilFreelancer/rpa-bugfix" },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/rpa-bugfix.git",
+        "ref": "main"
+      },
       "description": "Fix a bug with a reproduction test first, then the fix, then the full suite, then a short report. Requires a clear bug description.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "category": "workflow",
       "license": "MIT"
     },
     {
       "name": "logika",
-      "source": { "source": "github", "repo": "EvilFreelancer/logika" },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/logika.git",
+        "ref": "main"
+      },
       "description": "Classical formal logic from G. Chelpanov's textbook: concepts, judgments, syllogisms, induction, fallacies, laws of thought.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "category": "reasoning",
       "license": "MIT"
     },
     {
       "name": "token-cost",
-      "source": { "source": "github", "repo": "EvilFreelancer/token-cost" },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/token-cost.git",
+        "ref": "main"
+      },
       "description": "Estimate the floor (self-) cost of a self-hosted LLM token: electricity + hardware amortization, measured on the server. Not the market API price.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "category": "ops",
       "license": "MIT"
     },
     {
       "name": "mikrotik-config-gen",
-      "source": { "source": "github", "repo": "EvilFreelancer/mikrotik-config-gen" },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/mikrotik-config-gen.git",
+        "ref": "main"
+      },
       "description": "Generate secure MikroTik RouterOS v7 configs from plain language, or review and harden an existing /export. Hardening baseline, four presets, per-model device reference, offline validator.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "category": "networking",
       "license": "MIT"
     },
     {
       "name": "screenshotting-gui",
-      "source": { "source": "github", "repo": "EvilFreelancer/screenshotting-gui" },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/screenshotting-gui.git",
+        "ref": "main"
+      },
       "description": "Capture clean, repeatable screenshots of a GUI desktop app (IDEs, browsers, native apps) on an isolated Xvfb display: drive it with python-Xlib, capture with ImageMagick, annotate with a highlight box, crop or arrow. Never touches the operator's live desktop.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "category": "ops",
       "license": "MIT"
     },
     {
       "name": "gpu-server-setup",
-      "source": { "source": "github", "repo": "EvilFreelancer/gpu-server-setup" },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/gpu-server-setup.git",
+        "ref": "main"
+      },
       "description": "Prepare a Linux server with NVIDIA GPUs for LLM and neural-network workloads: NVIDIA driver + CUDA from the official repo, Docker + NVIDIA Container Toolkit as the mandatory base, staged verification gates, optional compose presets for vLLM, Infinity, OpenWebUI and Ollama (llama.cpp via its official image), and GPU power-limit setup persisted via systemd.",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "category": "ops",
       "license": "MIT"
     },
     {
       "name": "rdp-agent",
-      "source": { "source": "github", "repo": "EvilFreelancer/rdp-agent" },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/rdp-agent.git",
+        "ref": "main"
+      },
       "description": "Drive a remote Windows machine over RDP from an AI agent: the RDP client runs on an isolated Xvfb display, the operator watches the same screen in a VNC window and can take over by hand, the session survives between agent turns, and lock screens are recovered by an NLA reconnect instead of typing the password.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "category": "ops",
       "license": "MIT"
     }

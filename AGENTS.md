@@ -77,10 +77,17 @@ Nothing is allowed to drift.
 
 1. Publish the skill's **own repo** first (flat layout: `SKILL.md` at the repo root, its own
    `.claude-plugin/` + `.codex-plugin/` manifests). The catalog cannot resolve an entry whose repo is not
-   pushed.
-2. Add a plugin entry to **both** manifests. Claude entry: `source: {source:"github", repo:"EvilFreelancer/<name>"}`.
-   Codex entry: `source: {source:"url", url:"https://github.com/EvilFreelancer/<name>.git", ref:"main"}` plus
-   `policy` + `category`.
+   pushed. The skill's `.claude-plugin/plugin.json` must **not** contain a `category` key: the plugin
+   manifest schema is strict, `claude plugin validate` rejects unknown keys
+   (`Unrecognized key: "category"`), and the install fails before the skill is ever downloaded.
+   `category` belongs **only** in this catalog's `marketplace.json` entries, where both manifests accept it.
+2. Add a plugin entry to **both** manifests, and use a **`url` source with an HTTPS clone URL** in both:
+   `source: {source:"url", url:"https://github.com/EvilFreelancer/<name>.git", ref:"main"}` (plus
+   `policy` + `category` in the Codex entry). Never use `source: {source:"github", repo:"owner/name"}`
+   for the Claude entry: the CLI clones `github` sources over **SSH**
+   (`git@github.com:owner/name.git`), so the install fails on any machine without a GitHub SSH key —
+   the default for Windows and Claude Desktop users. Public repositories over HTTPS need no
+   authentication.
 3. Add a row to the README **Skills** table and add `<name>` to `install.sh`'s `ALL_SKILLS`.
 4. Minor-bump `metadata.version` in both manifests.
 
