@@ -5,13 +5,13 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Codex, Claude Code, Cursor and other agents.",
-    "version": "2.4.3"
+    "version": "2.4.4"
   },
   "plugins": [
     {
       "name": "rpa-init",
       "source": { "source": "url", "url": "https://github.com/EvilFreelancer/rpa-init.git", "ref": "main" },
-      "description": "Warm up context on a repository: study code, docs and tests, set up the dev environment, run tests, write a short report. No extra brief required.",
+      "description": "Warm up context on a repository: optionally git pull first, then study code, docs and tests, set up the dev environment, run tests, write a short report. No extra brief required.",
       "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
       "category": "Developer Tools",
       "license": "MIT"
