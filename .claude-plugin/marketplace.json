@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
-    "version": "2.4.3"
+    "version": "2.4.4"
   },
   "plugins": [
     {
@@ -16,8 +16,8 @@
         "url": "https://github.com/EvilFreelancer/rpa-init.git",
         "ref": "main"
       },
-      "description": "Warm up context on a repository: study code, docs and tests, set up the dev environment, run tests, write a short report. No extra brief required.",
-      "version": "1.0.1",
+      "description": "Warm up context on a repository: optionally git pull first, then study code, docs and tests, set up the dev environment, run tests, write a short report. No extra brief required.",
+      "version": "1.0.2",
       "category": "workflow",
       "license": "MIT"
     },
