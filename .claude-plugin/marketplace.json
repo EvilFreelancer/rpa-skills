@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
-    "version": "2.4.4"
+    "version": "2.5.0"
   },
   "plugins": [
     {
@@ -127,6 +127,18 @@
       "description": "Drive a remote Windows machine over RDP from an AI agent: the RDP client runs on an isolated Xvfb display, the operator watches the same screen in a VNC window and can take over by hand, the session survives between agent turns, and lock screens are recovered by an NLA reconnect instead of typing the password.",
       "version": "0.1.1",
       "category": "ops",
+      "license": "MIT"
+    },
+    {
+      "name": "crossreview",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/crossreview.git",
+        "ref": "main"
+      },
+      "description": "Cross-review code with several console code agents at once: Claude Code, Codex, Coddy, Cursor Agent, Devin, OpenCode and others review the same brief in parallel and blind to each other, then the orchestrating agent verifies every finding against the code and decides alone what matters and what to fix. Linux, macOS and Windows; reviewers chosen once per agent, for one project or for all of them.",
+      "version": "2.0.0",
+      "category": "workflow",
       "license": "MIT"
     }
   ]

@@ -37,6 +37,7 @@ ALL_SKILLS=(
   screenshotting-gui
   gpu-server-setup
   rdp-agent
+  crossreview
 )
 
 usage() {
