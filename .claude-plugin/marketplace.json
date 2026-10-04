@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
-    "version": "2.5.0"
+    "version": "2.5.1"
   },
   "plugins": [
     {
@@ -28,8 +28,8 @@
         "url": "https://github.com/EvilFreelancer/rpa-gen-rules.git",
         "ref": "main"
       },
-      "description": "Create or refresh agent project rules (Cursor .mdc, Claude Code .claude/rules, Codex .codex hook bridge that auto-attaches Cursor rules by glob). Layered-cake architecture + BDD, with a mandatory Rules Sync step across agent trees. Rules and AGENTS.md in English unless asked otherwise.",
-      "version": "1.3.1",
+      "description": "Use when the user invokes /rpa-gen-rules or asks to create, refresh, audit, or synchronize project instructions such as root AGENTS.md, Cursor .cursor/rules, or Claude Code .claude/rules, especially when existing rule trees have drifted.",
+      "version": "1.3.2",
       "category": "workflow",
       "license": "MIT"
     },
