@@ -45,10 +45,10 @@ none of them, it has the catalog built in:
 
 | File | Consumed by | How you connect it |
 |------|-------------|--------------------|
+| built into Coddy | **[Coddy](https://coddy.dev)** | nothing to connect: `coddy skills sync` |
 | [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) | **Claude Code** (also read by Codex as a legacy fallback) | `/plugin marketplace add EvilFreelancer/rpa-skills` |
 | [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) | **Codex** | `codex plugin marketplace add EvilFreelancer/rpa-skills` |
 | [`install.sh`](install.sh) | **Cursor** and any folder-based agent | clones skills into `~/.agents/skills/` |
-| built into Coddy | **[Coddy](https://coddy.dev)** | nothing to connect: `coddy skills sync` |
 
 > All three point at the per-skill repositories listed above. Make sure those repositories exist and are
 > pushed (they are split out from this one), then the entries resolve.
