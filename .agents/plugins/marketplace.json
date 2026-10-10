@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Codex, Claude Code, Cursor and other agents.",
-    "version": "2.5.3"
+    "version": "2.6.0"
   },
   "plugins": [
     {
@@ -92,6 +92,14 @@
       "name": "crossreview",
       "source": { "source": "url", "url": "https://github.com/EvilFreelancer/crossreview.git", "ref": "main" },
       "description": "Cross-review code with several console code agents at once: Claude Code, Codex, Coddy, Cursor Agent, Devin, OpenCode and others review the same brief in parallel and blind to each other, then the orchestrating agent verifies every finding against the code and decides alone what matters and what to fix. Linux, macOS and Windows; reviewers chosen once per agent, for one project or for all of them.",
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Developer Tools",
+      "license": "MIT"
+    },
+    {
+      "name": "nd-search",
+      "source": { "source": "url", "url": "https://github.com/EvilFreelancer/nd-search.git", "ref": "main" },
+      "description": "Search the web, read the clean text of a page by URL, crawl a few pages of one site and search Telegram channels through the NeuralDeep Search API with an sk- key. A standard-library Python client takes the key from --api-key or NEURALDEEP_API_KEY, prints compact text or the raw JSON and exits with meaningful codes.",
       "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
       "category": "Developer Tools",
       "license": "MIT"

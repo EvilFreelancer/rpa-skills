@@ -38,6 +38,7 @@ ALL_SKILLS=(
   gpu-server-setup
   rdp-agent
   crossreview
+  nd-search
 )
 
 usage() {
