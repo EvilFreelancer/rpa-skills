@@ -73,6 +73,15 @@ Nothing is allowed to drift.
      catalog release too.
 3. Validate and commit (below).
 
+## Coddy reads this catalog
+
+Coddy has `EvilFreelancer/rpa-skills` built in as a system source, so whatever lands on `main` here reaches
+every Coddy user on their next `coddy skills sync`: an added skill gets installed, a mirrored version gets
+pulled. Push only entries whose skill repository is public and resolves. Separately, coddy-agent vendors
+`crossreview` and the `rpa-*` skills into its binary (`make skills-vendor`, sources in
+`scripts/bundled-skills.json` there); a release of one of those skills also needs that re-vendoring to
+reach users who never sync.
+
 ## Adding a new skill to the catalog
 
 1. Publish the skill's **own repo** first (flat layout: `SKILL.md` at the repo root, its own

@@ -40,13 +40,15 @@ Each skill repository has its own **README.md** with usage, install, and attribu
 ## Install
 
 This catalog ships **two marketplace manifests** so it can be connected as a marketplace from more than one
-agent, plus a plain installer script for agents that have no remote marketplace at all:
+agent, plus a plain installer script for agents that have no remote marketplace at all. Coddy needs
+none of them, it has the catalog built in:
 
 | File | Consumed by | How you connect it |
 |------|-------------|--------------------|
 | [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) | **Claude Code** (also read by Codex as a legacy fallback) | `/plugin marketplace add EvilFreelancer/rpa-skills` |
 | [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) | **Codex** | `codex plugin marketplace add EvilFreelancer/rpa-skills` |
 | [`install.sh`](install.sh) | **Cursor** and any folder-based agent | clones skills into `~/.agents/skills/` |
+| built into Coddy | **[Coddy](https://coddy.dev)** | nothing to connect: `coddy skills sync` |
 
 > All three point at the per-skill repositories listed above. Make sure those repositories exist and are
 > pushed (they are split out from this one), then the entries resolve.
@@ -74,6 +76,22 @@ codex plugin marketplace list        # verify it resolved
 
 Codex reads [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json). It can also read the
 Claude manifest above as a legacy-compatible source, so either entry point works.
+
+### Coddy
+
+[Coddy](https://coddy.dev) has this catalog built in as a system source: it is in effect on every machine
+without being declared in any file, so there is nothing to connect. One command installs every skill of
+the catalog into `~/.coddy/skills/` and keeps them up to date (**Sync all** in Settings → Skills does the
+same):
+
+```bash
+coddy skills sync                 # install or update everything the catalog publishes
+coddy plugin marketplace list     # shows EvilFreelancer/rpa-skills as built into Coddy
+```
+
+`/crossreview` and the `rpa-*` skills (`/rpa-init`, `/rpa-feat`, `/rpa-bugfix`, `/rpa-gen-rules`) ship
+inside Coddy itself and are there on the first run, offline. To drop a skill, disable or delete it
+(`coddy skills disable <name>`); the catalog itself cannot be removed from Coddy.
 
 ### Cursor (and other folder-based agents)
 
