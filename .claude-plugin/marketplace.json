@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
-    "version": "2.6.0"
+    "version": "2.6.1"
   },
   "plugins": [
     {
@@ -112,8 +112,8 @@
         "url": "https://github.com/EvilFreelancer/gpu-server-setup.git",
         "ref": "main"
       },
-      "description": "Prepare a Linux server with NVIDIA GPUs for LLM and neural-network workloads: NVIDIA driver + CUDA from the official repo, Docker + NVIDIA Container Toolkit as the mandatory base, staged verification gates, optional compose presets for vLLM, Infinity, OpenWebUI and Ollama (llama.cpp via its official image), and GPU power-limit setup persisted via systemd.",
-      "version": "0.2.2",
+      "description": "Prepare a Linux server with NVIDIA or Intel Arc GPUs for LLM and neural-network workloads: NVIDIA driver + CUDA from the official repo or the in-tree Intel i915/xe driver with distro firmware, Docker Engine with verified GPU access (NVIDIA Container Toolkit or /dev/dri passthrough) as the mandatory base, staged verification gates for both vendors, optional docker-compose presets for vLLM, Infinity, OpenWebUI and Ollama plus Intel Arc stacks (llama.cpp SYCL/Vulkan, Ollama, OpenVINO, vLLM), GPU power limits persisted via systemd, case fans driven by GPU temperature and Intel Arc idle-power fixes (ASPM).",
+      "version": "0.3.0",
       "category": "ops",
       "license": "MIT"
     },
