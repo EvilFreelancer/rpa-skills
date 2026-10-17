@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
-    "version": "2.6.1"
+    "version": "2.7.0"
   },
   "plugins": [
     {
@@ -114,6 +114,42 @@
       },
       "description": "Prepare a Linux server with NVIDIA or Intel Arc GPUs for LLM and neural-network workloads: NVIDIA driver + CUDA from the official repo or the in-tree Intel i915/xe driver with distro firmware, Docker Engine with verified GPU access (NVIDIA Container Toolkit or /dev/dri passthrough) as the mandatory base, staged verification gates for both vendors, optional docker-compose presets for vLLM, Infinity, OpenWebUI and Ollama plus Intel Arc stacks (llama.cpp SYCL/Vulkan, Ollama, OpenVINO, vLLM), GPU power limits persisted via systemd, case fans driven by GPU temperature and Intel Arc idle-power fixes (ASPM).",
       "version": "0.3.0",
+      "category": "ops",
+      "license": "MIT"
+    },
+    {
+      "name": "server-discovery",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/server-discovery.git",
+        "ref": "main"
+      },
+      "description": "Read-only discovery for a fleet harness repository: a POSIX probe sent over ssh collects OS, kernel, CPU, RAM, disks, Docker, NVIDIA and Intel Arc GPUs, addresses, ports, tunnels and DNAT rules; discover.py turns it into the host card after comparing it with the card, render_index.py validates every card and regenerates the host index and an optional self-contained network map.",
+      "version": "0.1.0",
+      "category": "ops",
+      "license": "MIT"
+    },
+    {
+      "name": "server-onboarding",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/server-onboarding.git",
+        "ref": "main"
+      },
+      "description": "Onboard a server into a fleet harness repository: reach it over ssh with a confirmed host key, discover it read-only with server-discovery, place it in a namespace, write the host card and README, mirror its compose stacks and system configs, add it to the namespace Topology, regenerate the index, and hand a box with an incomplete GPU stack to gpu-server-setup once the user agrees.",
+      "version": "0.1.0",
+      "category": "ops",
+      "license": "MIT"
+    },
+    {
+      "name": "server-healthcheck",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/server-healthcheck.git",
+        "ref": "main"
+      },
+      "description": "Check whether a host or a whole namespace of a fleet harness repository is healthy, read-only: a POSIX pass over boot history, clock, units, disks, OOM, containers, resolvers, ports, NVIDIA and Intel Arc GPUs and PCIe AER, drift against the host card, stacks against the mirror, and functional probes of every service, rolled up into healthy, warming up, degraded, broken or unreachable.",
+      "version": "0.1.0",
       "category": "ops",
       "license": "MIT"
     },

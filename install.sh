@@ -36,6 +36,9 @@ ALL_SKILLS=(
   mikrotik-config-gen
   screenshotting-gui
   gpu-server-setup
+  server-discovery
+  server-onboarding
+  server-healthcheck
   rdp-agent
   crossreview
   nd-search
