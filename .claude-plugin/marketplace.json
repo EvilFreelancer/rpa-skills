@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
-    "version": "2.7.1"
+    "version": "2.7.2"
   },
   "plugins": [
     {
@@ -125,7 +125,7 @@
         "ref": "main"
       },
       "description": "Read-only discovery for a fleet harness repository: a POSIX probe sent over ssh collects OS, kernel, CPU, RAM, disks, Docker, NVIDIA and Intel Arc GPUs, addresses, ports, tunnels and DNAT rules; discover.py turns it into the host card after comparing it with the card, render_index.py validates every card and regenerates the host index and an optional self-contained network map.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "category": "ops",
       "license": "MIT"
     },
