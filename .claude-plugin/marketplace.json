@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
-    "version": "2.7.3"
+    "version": "2.7.4"
   },
   "plugins": [
     {
@@ -113,7 +113,7 @@
         "ref": "main"
       },
       "description": "Prepare a Linux server with NVIDIA or Intel Arc GPUs for LLM and neural-network workloads: NVIDIA driver + CUDA from the official repo or the in-tree Intel i915/xe driver with distro firmware, Docker Engine with verified GPU access (NVIDIA Container Toolkit or /dev/dri passthrough) as the mandatory base, staged verification gates for both vendors, optional docker-compose presets for vLLM, Infinity, OpenWebUI and Ollama plus Intel Arc stacks (llama.cpp SYCL/Vulkan, Ollama, OpenVINO, vLLM), GPU power limits persisted via systemd, case fans driven by GPU temperature and Intel Arc idle-power fixes (ASPM).",
-      "version": "0.4.0",
+      "version": "0.5.0",
       "category": "ops",
       "license": "MIT"
     },
