@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
-    "version": "2.7.6"
+    "version": "2.7.7"
   },
   "plugins": [
     {
@@ -173,7 +173,7 @@
         "ref": "main"
       },
       "description": "Cross-review code with several console code agents at once: Claude Code, Codex, Coddy, Cursor Agent, Devin, OpenCode and others review the same brief in parallel and blind to each other, then the orchestrating agent verifies every finding against the code and decides alone what matters and what to fix. Linux, macOS and Windows; reviewers chosen once per agent, for one project or for all of them.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "category": "workflow",
       "license": "MIT"
     },
