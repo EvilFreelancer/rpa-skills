@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Codex, Claude Code, Cursor and other agents.",
-    "version": "2.7.7"
+    "version": "2.7.8"
   },
   "plugins": [
     {
@@ -123,7 +123,7 @@
     {
       "name": "nd-search",
       "source": { "source": "url", "url": "https://github.com/EvilFreelancer/nd-search.git", "ref": "main" },
-      "description": "Search the web, read the clean text of a page by URL, crawl a few pages of one site and search Telegram channels through the NeuralDeep Search API with an sk- key. A standard-library Python client takes the key from --api-key or NEURALDEEP_API_KEY, prints compact text or the raw JSON and exits with meaningful codes.",
+      "description": "Search the web, read the clean text of a page by URL, crawl a few pages of one site and search Telegram channels through the NeuralDeep Search API with an sk- key. A standard-library Python client takes the key from --api-key, NEURALDEEP_SEARCH_API_KEY or NEURALDEEP_API_KEY, prints compact text or the raw JSON and exits with meaningful codes.",
       "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
       "category": "Developer Tools",
       "license": "MIT"
