@@ -41,6 +41,7 @@ ALL_SKILLS=(
   server-healthcheck
   rdp-agent
   crossreview
+  og-preview
   nd-search
 )
 
