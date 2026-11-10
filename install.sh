@@ -42,6 +42,7 @@ ALL_SKILLS=(
   rdp-agent
   crossreview
   og-preview
+  diagram-authoring
   nd-search
 )
 

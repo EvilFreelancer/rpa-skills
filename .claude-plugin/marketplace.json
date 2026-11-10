@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
-    "version": "2.8.2"
+    "version": "2.9.0"
   },
   "plugins": [
     {
@@ -185,6 +185,18 @@
         "ref": "main"
       },
       "description": "Test Open Graph, Twitter Card and social-link meta tags fully offline: feed it a URL (localhost works) or an HTML file and get a report with mocked preview cards for Telegram, X/Twitter, Facebook, Discord, Slack, WhatsApp, LinkedIn, Reddit and iMessage plus rule-violation findings. No third-party API.",
+      "version": "1.0.0",
+      "category": "workflow",
+      "license": "MIT"
+    },
+    {
+      "name": "diagram-authoring",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EvilFreelancer/diagram-authoring.git",
+        "ref": "main"
+      },
+      "description": "Use when the user asks to create, draw, render, or update a technical diagram, architecture scheme, process flow, lifecycle, or system map from supplied information and expects editable source plus a finished image.",
       "version": "1.0.0",
       "category": "workflow",
       "license": "MIT"
