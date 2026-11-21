@@ -11,8 +11,9 @@
 #
 # What it does: clones (or updates) each split-out skill repository into a
 # skills root. The default root is ~/.agents/skills, which is read as a global
-# skills directory by Cursor and Codex. Each skill repo keeps SKILL.md at its
-# root, so it lands as <root>/<name>/SKILL.md and the agent picks it up by name.
+# skills directory by Cursor and Codex. Flat skill repositories land directly
+# at <root>/<name>; repositories with a nested skill path are linked from that
+# path into the same location.
 #
 # Usage:
 #   ./install.sh                      # install/update all skills into ~/.agents/skills
@@ -73,9 +74,74 @@ mkdir -p "$SKILLS_DIR"
 echo "Installing RPA Skills into: $SKILLS_DIR"
 echo
 
+install_nested_skill() {
+  local name="$1"
+  local url="$2"
+  local skill_path="$3"
+  local dest="$SKILLS_DIR/$name"
+  local repo_dir="$SKILLS_DIR/.rpa-skill-sources/$name"
+  local link_target=".rpa-skill-sources/$name/$skill_path"
+  local migrated_legacy=0
+
+  mkdir -p "$SKILLS_DIR/.rpa-skill-sources"
+
+  # Migrate the previous full-repository clone without discarding local files.
+  if [ -d "$dest/.git" ] && [ ! -e "$repo_dir" ]; then
+    echo "↻ updating legacy $name checkout"
+    if ! git -C "$dest" pull --ff-only --quiet; then
+      echo "  ! could not update $name; keeping the existing installation" >&2
+      return
+    fi
+    if [ ! -f "$dest/$skill_path/SKILL.md" ]; then
+      echo "  ! $name repository does not have $skill_path/SKILL.md yet; keeping the existing installation" >&2
+      return
+    fi
+    mv "$dest" "$repo_dir"
+    migrated_legacy=1
+  fi
+
+  if [ -d "$repo_dir/.git" ]; then
+    if [ "$migrated_legacy" -eq 0 ]; then
+      echo "↻ updating $name source"
+      git -C "$repo_dir" pull --ff-only --quiet || echo "  ! could not fast-forward $name (local changes?)" >&2
+    fi
+  elif [ ! -e "$repo_dir" ]; then
+    echo "↓ cloning  $name source"
+    git clone --depth 1 --quiet "$url" "$repo_dir" || {
+      echo "  ! failed to clone $name ($url)" >&2
+      return
+    }
+  else
+    echo "  ! source path exists but is not a Git checkout: $repo_dir" >&2
+    return
+  fi
+
+  if [ ! -f "$repo_dir/$skill_path/SKILL.md" ]; then
+    echo "  ! $name skill path not found: $skill_path/SKILL.md" >&2
+    return
+  fi
+
+  if [ -L "$dest" ]; then
+    if [ "$(readlink "$dest")" != "$link_target" ]; then
+      echo "  ! $dest is a symlink to an unexpected location; leaving it unchanged" >&2
+    fi
+  elif [ -e "$dest" ]; then
+    echo "  ! $dest exists and is not a managed symlink; leaving it unchanged" >&2
+  else
+    if ! ln -s "$link_target" "$dest"; then
+      echo "  ! could not link $name; copy $repo_dir/$skill_path to $dest manually" >&2
+    fi
+  fi
+}
+
 for name in "${SKILLS[@]}"; do
   dest="$SKILLS_DIR/$name"
   url="https://github.com/$OWNER/$name.git"
+  if [ "$name" = "logika" ]; then
+    install_nested_skill "$name" "$url" "skills/logika"
+    continue
+  fi
+
   if [ -d "$dest/.git" ]; then
     echo "↻ updating $name"
     git -C "$dest" pull --ff-only --quiet || echo "  ! could not fast-forward $name (local changes?)" >&2

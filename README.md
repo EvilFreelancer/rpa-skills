@@ -119,29 +119,42 @@ Then reload the Cursor window (`Cmd/Ctrl+Shift+P` → *Developer: Reload Window*
 
 ### A single skill, by hand
 
-Every skill repo keeps its `SKILL.md` at the repo root, so you can clone one straight into a skills root.
-The directory name must match the `name` field in `SKILL.md`:
+For a flat skill repository, clone it directly into a skills root. The directory name must match the
+`name` field in `SKILL.md`:
 
 ```bash
-git clone https://github.com/EvilFreelancer/logika ~/.agents/skills/logika
+git clone https://github.com/EvilFreelancer/rpa-init ~/.agents/skills/rpa-init
+```
+
+Logika is a plugin repository with its skill under `skills/logika/`; copy that skill directory itself:
+
+```bash
+git clone https://github.com/EvilFreelancer/logika logika-repo
+mkdir -p ~/.agents/skills
+cp -R logika-repo/skills/logika ~/.agents/skills/logika
 ```
 
 ## Typical skill layout
 
 ```
-<skill>/
+<flat-skill-repository>/
 ├─ .claude-plugin/
-│  └─ plugin.json        # plugin manifest (name, version, description) — no skills field
+│  └─ plugin.json        # optional plugin manifest (name, version, description, platform settings)
 ├─ SKILL.md              # YAML frontmatter + agent instructions (canonical, loaded from the repo root)
 ├─ references/ | scripts/   # optional bundled assets, referenced relative to SKILL.md
 ├─ README.md             # human overview
 └─ LICENSE
 ```
 
+Plugin repositories may instead contain one or more skill folders, each with its own `SKILL.md` and
+supporting files. Logika uses `skills/logika/`; `install.sh` maps that nested directory into the normal
+`<skills-root>/logika/` location.
+
 A plugin with `SKILL.md` at the repo root, no `skills/` directory, and no `skills` field in `plugin.json`
-is loaded by Claude Code (v2.1.142+) as a single-skill plugin; the invocation name comes from the `name`
-field in `SKILL.md`. That name should match the slash command — the `rpa-*` skills use hyphenated names
-such as `/rpa-init`.
+is also loaded by Claude Code (v2.1.142+) as a single-skill plugin; the invocation name comes from the
+`name` field in `SKILL.md`. For cross-platform plugins with supporting files or multiple skills, use
+`skills/<name>/SKILL.md`. Logika follows that layout; the folder installer maps its `skills/logika/`
+directory into `<skills-root>/logika/`.
 
 ## Making the agent use a skill
 
