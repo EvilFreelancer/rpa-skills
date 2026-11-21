@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Pavel Rykov's agent-skills marketplace for Claude Code, OpenAI Codex, Cursor, Kimi Code CLI and other agents.",
-    "version": "2.9.0"
+    "version": "2.9.1"
   },
   "plugins": [
     {
@@ -65,7 +65,7 @@
         "ref": "main"
       },
       "description": "Classical formal logic from G. Chelpanov's textbook: concepts, judgments, syllogisms, induction, fallacies, laws of thought.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "category": "reasoning",
       "license": "MIT"
     },

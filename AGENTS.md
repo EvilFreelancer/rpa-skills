@@ -20,7 +20,7 @@ rpa-skills/
 │  └─ marketplace.json      # Claude Code marketplace (per-plugin `version` + `description`)
 ├─ .agents/plugins/
 │  └─ marketplace.json      # Codex marketplace (git-backed sources; version resolved from the skill repo)
-├─ install.sh               # folder-based installer for Cursor & co. (ALL_SKILLS array of repo names)
+├─ install.sh               # folder-based installer for Cursor & co. (flat repos + nested skill paths)
 ├─ README.md                # human overview + the Skills table (one row per skill)
 ├─ AGENTS.md                # this file — the collection-wide process
 ├─ CLAUDE.md                # symlink → AGENTS.md (so Claude Code reads the same guide)
@@ -84,9 +84,10 @@ reach users who never sync.
 
 ## Adding a new skill to the catalog
 
-1. Publish the skill's **own repo** first (flat layout: `SKILL.md` at the repo root, its own
-   `.claude-plugin/` + `.codex-plugin/` manifests). The catalog cannot resolve an entry whose repo is not
-   pushed. The skill's `.claude-plugin/plugin.json` must **not** contain a `category` key: the plugin
+1. Publish the skill's **own repo** first, with its canonical skill path and plugin manifests. A
+   single-skill repository may keep `SKILL.md` at its root; plugin repositories may use
+   `skills/<name>/SKILL.md`. The catalog cannot resolve an entry whose repo is not pushed. The skill's
+   `.claude-plugin/plugin.json` must **not** contain a `category` key: the plugin
    manifest schema is strict, `claude plugin validate` rejects unknown keys
    (`Unrecognized key: "category"`), and the install fails before the skill is ever downloaded.
    `category` belongs **only** in this catalog's `marketplace.json` entries, where both manifests accept it.
@@ -97,7 +98,9 @@ reach users who never sync.
    (`git@github.com:owner/name.git`), so the install fails on any machine without a GitHub SSH key —
    the default for Windows and Claude Desktop users. Public repositories over HTTPS need no
    authentication.
-3. Add a row to the README **Skills** table and add `<name>` to `install.sh`'s `ALL_SKILLS`.
+3. Add a row to the README **Skills** table and add `<name>` to `install.sh`'s `ALL_SKILLS`. If the
+   canonical skill lives below the repository root, add or update the corresponding nested-path mapping
+   in `install.sh` and document how the installed folder is produced.
 4. Minor-bump `metadata.version` in both manifests.
 
 ## Validate before committing
